@@ -48,7 +48,7 @@ namespace Business.Concrete
 
 
         [CacheAspect()]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         public IDataResult<List<Customer>> GetAllCustomers()
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(),Messages.CustomerListed);

@@ -27,7 +27,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult AddRental(Rental rental)
         {
@@ -52,14 +52,14 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-       // [SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         public IDataResult<List<Rental>> GetAllRentals()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
         }
 
         [CacheAspect]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.RentalDetails(), Messages.RentalListed);

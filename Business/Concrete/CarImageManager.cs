@@ -30,7 +30,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.CarImageListed);
         }
 
-        //[SecuredOperation("carimage.add,customer,admin")]
+        [SecuredOperation("carimage.add,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
         public IResult AddCarImage(CarImage carImage, IFormFile file)
         {
@@ -60,7 +60,7 @@ namespace Business.Concrete
 
 
 
-        //[SecuredOperation("carimage.delete,customer,admin")]
+        [SecuredOperation("carimage.delete,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
         public IResult DeleteCarImage(CarImage carImage)
         {
@@ -75,7 +75,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        //[SecuredOperation("carimage.update,customer,admin")]
+        [SecuredOperation("carimage.update,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
         public IResult UpdateCarImage(CarImage carImage, IFormFile file)
         {
@@ -98,15 +98,15 @@ namespace Business.Concrete
 
         }
 
-        //[SecuredOperation("carimage.getcarimagebyid,customer,admin")]
-        //[CacheAspect]
+        [SecuredOperation("carimage.getcarimagebyid,customer,admin")]
+        [CacheAspect]
         public IDataResult<CarImage> GetCarImageById(int carImageId)
         {
            return new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.Id == carImageId));
         }
 
         //[SecuredOperation("carimage.getallcarimagesbycarid,customer,admin")]
-        //[CacheAspect]
+        [CacheAspect]
         public IDataResult<List<CarImage>> GetAllCarImagesByCarId(int carId)
         {
             var result = new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(x => x.CarId == carId));

@@ -37,7 +37,7 @@ namespace Business.Concrete
 
 
         [CacheRemoveAspect("IUserService.Get")]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult DeleteUser(User user)
         {
@@ -47,7 +47,7 @@ namespace Business.Concrete
 
 
         [CacheAspect]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         public IDataResult<List<User>> GetAllUsers()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UserListed);
@@ -70,7 +70,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         public IDataResult<User> GetUserById(int userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(x => x.Id == userId), Messages.UserFetched);
@@ -78,7 +78,7 @@ namespace Business.Concrete
 
 
         [CacheRemoveAspect("IUserService.Get")]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult UpdateUser(User user)
         {
