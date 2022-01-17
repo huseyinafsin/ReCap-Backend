@@ -39,11 +39,17 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<List<CarDetailDto>> CarDetails()
+        public IDataResult<List<CarDetailDto>> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
            
             return new SuccessDataResult<List<CarDetailDto>>( _carDal.CarDetails(),Messages.CarListed);
             
+        }
+
+        public IDataResult<List<CarDetailDto>> CarTopCarsDetails(int top)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(
+                _carDal.CarDetails().OrderBy(x=>x.DailyPrice).Take(top).ToList(), Messages.CarListed);
         }
 
         public IDataResult<CarDetailDto> CarDetailsById(int carId)

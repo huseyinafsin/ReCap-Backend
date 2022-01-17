@@ -30,10 +30,7 @@ namespace DataAccess.Concrete.InMemory
             _cars.Add(car);
         }
 
-        public List<CarDetailDto> CarDetails(CarDetailFilter filter)
-        {
-            throw new NotImplementedException();
-        }
+     
 
         public List<CarDetailDto> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {

@@ -20,5 +20,6 @@ namespace Entities.Concrete
         [Column(TypeName = "decimal(18,4)")]
         public decimal DaiyPrice { get; set; }
         public string Description { get; set; }
+        public int MinFindexScore { get; set; }
     }
 }

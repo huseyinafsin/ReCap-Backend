@@ -4,6 +4,7 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
+using System.Linq;
 using Business.Abstract;
 using Core.Entities.Concrete;
 
@@ -37,6 +38,13 @@ namespace ConsoleUI
            //Console.WriteLine(_userManager.GetByMail("admin@mail.com").FirstName);
 
            Console.WriteLine("Merhaba");
+           RentACarContext context = new RentACarContext();
+           var images = context.CarImages.ToList();
+           foreach (var image in images)
+           {
+               Console.WriteLine(image.ImagePath+"\n");
+
+            }
 
         }
 

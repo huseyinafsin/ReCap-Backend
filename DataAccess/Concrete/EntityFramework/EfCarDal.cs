@@ -37,6 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = ca.ModelYear,
                                  DailyPrice = ca.DaiyPrice,
                                  Description = ca.Description,
+                                 MinFindexScore = ca.MinFindexScore,
                                  Images = context.CarImages.Where(x => x.CarId == ca.Id).ToList()
 
                              };
@@ -66,6 +67,7 @@ namespace DataAccess.Concrete.EntityFramework
                         ModelYear = ca.ModelYear,
                         DailyPrice = ca.DaiyPrice,
                         Description = ca.Description,
+                        MinFindexScore = ca.MinFindexScore,
                         Images = context.CarImages.Where(x => x.CarId == ca.Id).ToList()
 
                     };

@@ -70,7 +70,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        [SecuredOperation("admin,customer")]
+        //[SecuredOperation("admin,customer")]
         public IDataResult<User> GetUserById(int userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(x => x.Id == userId), Messages.UserFetched);

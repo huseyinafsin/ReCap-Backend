@@ -26,8 +26,7 @@ namespace Business.Concrete
         }
 
 
-        [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("admin,customer")]
+        [CacheRemoveAspect("IColorService.Get")] [SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(ColorValidator))]
         public IResult AddColor(Color color)
         {

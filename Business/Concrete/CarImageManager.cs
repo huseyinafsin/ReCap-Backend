@@ -98,7 +98,7 @@ namespace Business.Concrete
 
         }
 
-        [SecuredOperation("carimage.getcarimagebyid,customer,admin")]
+        //[SecuredOperation("carimage.getcarimagebyid,customer,admin")]
         [CacheAspect]
         public IDataResult<CarImage> GetCarImageById(int carImageId)
         {

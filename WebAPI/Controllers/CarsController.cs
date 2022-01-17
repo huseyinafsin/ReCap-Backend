@@ -4,6 +4,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System.Linq.Expressions;
 using System;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -61,6 +62,19 @@ namespace WebAPI.Controllers
         public IActionResult Details()
         {
             var result = _carService.CarDetails();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }  
+        
+        [HttpGet("gettopcheapcars")]
+        public IActionResult GetTopCheapCars(int top)
+        {
+            var result = _carService.CarTopCarsDetails(top);
 
             if (result.Success)
             {
