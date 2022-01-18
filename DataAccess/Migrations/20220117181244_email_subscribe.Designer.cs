@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ReCapContext))]
-    [Migration("20220117164047_adding_creditScore")]
-    partial class adding_creditScore
+    [Migration("20220117181244_email_subscribe")]
+    partial class email_subscribe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -129,7 +129,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MinCreditScore")
+                    b.Property<int>("MinFindexScore")
                         .HasColumnType("int");
 
                     b.Property<int>("ModelYear")
@@ -220,7 +220,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreditScore")
+                    b.Property<int>("FindexScore")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -229,6 +229,22 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.MailSubscribe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MailSubscribes");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>

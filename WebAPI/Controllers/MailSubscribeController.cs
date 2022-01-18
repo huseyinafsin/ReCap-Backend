@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class MailSubscribeController : ControllerBase
     {
-        private readonly IBrandService _brandService;
+        private readonly IMailSubscribeService _mailSubscribeService;
 
-        public BrandsController(IBrandService brandService)
+        public MailSubscribeController(IMailSubscribeService mailSubscribeService)
         {
-            _brandService = brandService;   
+            _mailSubscribeService = mailSubscribeService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _brandService.GetAllBrands();
+            var result = _mailSubscribeService.GetAllMails();
 
             if (result.Success)
             {
@@ -29,9 +30,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int brandId)
+        public IActionResult GetById(int mailId)
         {
-            var result = _brandService.GetBrandById(brandId);
+            var result = _mailSubscribeService.GetMailById(mailId);
 
             if (result.Success)
             {
@@ -42,9 +43,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromBody] Brand brand)
+        public IActionResult Add([FromBody] MailSubscribe mail)
         {
-            var result = _brandService.AddBrand(brand);
+            var result = _mailSubscribeService.AddMail(mail);
 
             if (result.Success)
             {
@@ -55,9 +56,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete([FromBody] Brand brand)
+        public IActionResult Delete([FromBody] MailSubscribe mail)
         {
-            var result = _brandService.DeleteBrand(brand);
+            var result = _mailSubscribeService.DeleteMail(mail);
 
             if (result.Success)
             {
@@ -68,9 +69,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update([FromBody]Brand brand)
+        public IActionResult Update([FromBody] MailSubscribe mail)
         {
-            var result = _brandService.UpdateBrand(brand);
+            var result = _mailSubscribeService.UpdateMail(mail);
 
             if (result.Success)
             {

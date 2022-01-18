@@ -5,6 +5,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
+using Entities.Concrete;
 using Entities.DTOs;
 
 namespace Business.Concrete
@@ -13,6 +14,7 @@ namespace Business.Concrete
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
+        private ICustomerService _customerService;
 
         public AuthManager(IUserService userService, ITokenHelper tokenHelper)
         {
@@ -35,6 +37,38 @@ namespace Business.Concrete
             };
             _userService.AddUser(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
+        }
+
+        public IDataResult<Customer> CustomerRegister(CustomerForRegister customerForRegister, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var user = new User
+            {
+                Email = customerForRegister.Email,
+                FirstName = customerForRegister.FirstName,
+                LastName = customerForRegister.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = true
+            };
+            _userService.AddUser(user);
+            var customer = new Customer
+            {
+                CompanyName = customerForRegister.CompanyName,
+                FindexScore = customerForRegister.FindexScore,
+                UserId = user.Id
+            };
+
+            var result = _customerService.AddCustomer(customer);
+
+            if (result.Success)
+            {
+                return new SuccessDataResult<Customer>(customer, Messages.UserRegistered);
+                    
+            }
+
+            return new ErrorDataResult<Customer>(Messages.UserNotAdded);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)

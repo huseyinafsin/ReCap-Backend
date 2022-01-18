@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using Business.Abstract;
 using Core.Entities.Concrete;
+using DataAccess.Concrete;
 
 namespace ConsoleUI
 {
@@ -38,7 +39,7 @@ namespace ConsoleUI
            //Console.WriteLine(_userManager.GetByMail("admin@mail.com").FirstName);
 
            Console.WriteLine("Merhaba");
-           RentACarContext context = new RentACarContext();
+           ReCapContext context = new ReCapContext();
            var images = context.CarImages.ToList();
            foreach (var image in images)
            {

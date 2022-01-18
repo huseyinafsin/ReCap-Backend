@@ -28,6 +28,7 @@ namespace DataAccess.Concrete
         public virtual DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<CreditCard> CreditCards { get; set; }
+        public virtual DbSet<MailSubscribe> MailSubscribes { get; set; }
 
 
     }

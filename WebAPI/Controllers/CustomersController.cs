@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -30,9 +31,48 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+        
+        [HttpGet("getallwithdetails")]
+        public IActionResult GetAllWithDetails()
+        {
+            var result = _customerService.GetAllWithDetails();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int customerId)
+        {
+            var result = _customerService.GetCustomerById(customerId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        } 
+        
+        [HttpGet("getdetailsbymail")]
+        public IActionResult GetDetailByMail(string email)
+        {
+            var result = _customerService.GetDetailsByMail(email);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        } 
+        
+        [HttpGet("getwithdetails")]
+        public IActionResult GetWithDetails(int customerId)
         {
             var result = _customerService.GetCustomerById(customerId);
 
@@ -46,7 +86,7 @@ namespace WebAPI.Controllers
 
         [HttpPost("add")]
         public IActionResult Add(Customer customer)
-        {
+        {   
             var result = _customerService.AddCustomer(customer);
 
             if (result.Success)

@@ -66,7 +66,11 @@ namespace Business.Constants
         public static string AccessTokenCreated = " Access Token oluşturuldu";
         public static string CarCanNotRentable = "This car can't rentable";
         public static string CarCanRentable = "This car can rentable";
+        public static string UserNotExist = "User Not Exist";
+        public static string UserAlreadyCustomer =" User Already Customer";
+        public static string CustomerNotExist = "Customer Doesn't Exist";
+        public static string NotAddedCustomer = "Customer Not Added";
 
-
+        public static string UserNotAdded = "An error durring register custemer";
     }
 }

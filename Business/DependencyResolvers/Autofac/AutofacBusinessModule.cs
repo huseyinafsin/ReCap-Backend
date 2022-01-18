@@ -48,7 +48,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfCreditCardDal>().As<ICreditCardDal>();     
             
             builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
-            builder.RegisterType<EfPaymentDal>().As<IPaymentDal>();
+            builder.RegisterType<EfPaymentDal>().As<IPaymentDal>();   
+
+            builder.RegisterType<MailSubscribeManager>().As<IMailSubscribeService>().SingleInstance();
+            builder.RegisterType<EfMailSubscribeDal>().As<IMailSubscriberDal>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
