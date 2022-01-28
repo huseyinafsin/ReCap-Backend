@@ -56,6 +56,19 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result);
+        }     
+        
+        [HttpGet("getfindexscore")]
+        public IActionResult GetFindex(int customerId)
+        {
+            var result = _customerService.GetFindexScore(customerId);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         } 
         
         [HttpGet("getdetailsbymail")]

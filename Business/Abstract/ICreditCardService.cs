@@ -11,6 +11,7 @@ namespace Business.Abstract
     public interface ICreditCardService
     {
         IDataResult<List<CreditCard>> GetAllCreditCard();
+        IDataResult<List<CreditCard>> GetCardsByCustomerId(int customerId);
         IResult AddCreditCard(CreditCard creditCard);
         IResult DeleteCreditCard(CreditCard creditCard);
         IResult UpdateCreditCard(CreditCard creditCard);

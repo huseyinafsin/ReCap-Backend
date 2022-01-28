@@ -14,6 +14,7 @@ namespace Business.Abstract
         IResult DeleteCustomer(Customer customer);
         IResult UpdateCustomer(Customer customer);
         IDataResult<Customer> GetCustomerById(int customerId);
+        int GetFindexScore(int customerId);
         IDataResult<CustomerDetailDto> GetDetailsByMail(string email);
     }
 }

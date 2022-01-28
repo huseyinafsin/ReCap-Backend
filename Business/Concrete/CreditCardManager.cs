@@ -52,5 +52,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<bool>(_creditCardDal.CheckCreditCard(creditCard), "Credit card fetched successful");
         }
+
+        public IDataResult<List<CreditCard>> GetCardsByCustomerId(int customerId)
+        {
+            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(c=>c.CustomerId==customerId), "Credit Cards Listed");
+        }
     }
 }

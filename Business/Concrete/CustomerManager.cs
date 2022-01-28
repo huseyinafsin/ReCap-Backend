@@ -184,5 +184,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public int GetFindexScore(int customerId)
+        {
+            return _customerDal.GetWithDetails(c=>c.CustomerId==customerId).FindexScore;
+        }
     }
 }
