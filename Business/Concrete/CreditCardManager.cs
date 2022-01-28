@@ -57,5 +57,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(c=>c.CustomerId==customerId), "Credit Cards Listed");
         }
+
+        public IDataResult<bool> SaveCreditCard(int customerId, string cardNumber)
+        {
+            return new SuccessDataResult<bool>(_creditCardDal.SaveCreditCard(customerId, cardNumber), Messages.CreditCardSaved);
+        }
     }
 }

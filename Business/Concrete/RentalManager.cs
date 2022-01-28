@@ -52,7 +52,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        //[SecuredOperation("admin,customer")]
+        [SecuredOperation("admin,customer")]
         public IDataResult<List<Rental>> GetAllRentals()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);

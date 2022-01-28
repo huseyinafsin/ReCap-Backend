@@ -70,7 +70,7 @@ namespace Business.Constants
         public static string UserAlreadyCustomer =" User Already Customer";
         public static string CustomerNotExist = "Customer Doesn't Exist";
         public static string NotAddedCustomer = "Customer Not Added";
-
         public static string UserNotAdded = "An error durring register custemer";
+        public static string CreditCardSaved = "Credit Card Saved";
     }
 }

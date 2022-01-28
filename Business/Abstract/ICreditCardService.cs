@@ -17,5 +17,6 @@ namespace Business.Abstract
         IResult UpdateCreditCard(CreditCard creditCard);
         IDataResult<CreditCard> GetCreditCardById(int creditCardId);
         IDataResult<bool> CheckCreditCard(CreditCard creditCard);
+        IDataResult<bool> SaveCreditCard(int customerId, string cardNumber);
     }
 }

@@ -13,7 +13,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental,ReCapContext>, IRentalDal
     {
-       
+        private readonly EfCreditCardDal efCreditCardDal;
+
+        public EfRentalDal(EfCreditCardDal efCreditCardDal)
+        {
+            this.efCreditCardDal = efCreditCardDal;
+        }
 
         List<RentalDetailDto> IRentalDal.RentalDetails()
         {
@@ -59,17 +64,27 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapContext context = new ReCapContext())
             {
-               var creditCard = context.CreditCards.FirstOrDefault(c => c.CardNumber == rental.CardNumber.Trim() &&
-                                                        c.CardHolderFullName == rental.CardHolderFullName.Trim() &&
-                                                        c.ExpireYear == rental.ExpiredYear.Trim() &&
-                                                        c.ExpireMonth == rental.ExpiredMonth.Trim() &&
-                                                        c.Cvc == rental.Cvc.Trim()
-                );
+              
+               var creditCard = efCreditCardDal.GetCreditCardByCardNumber(rental.CardNumber);
 
-               if (creditCard == null)
-               {
-                   return new ErrorResult("Check your credit card");
-               }
+                if (efCreditCardDal.GetCreditCardByCardNumber(creditCard.CardNumber) !=null)
+                {
+
+                    creditCard = new CreditCard
+                    {
+                        CardHolderFullName = rental.CardHolderFullName,
+                        CardNumber = rental.CardNumber,
+                        Balance = 500, //Default Balance when cc is created
+                        //CustomerId = rental.CustomerId, if customer accept to save the card to db, it  will relate with custmer id 
+                        ExpireMonth = rental.ExpiredMonth,
+                        ExpireYear = rental.ExpiredYear,
+                        Cvc = rental.Cvc,
+
+                    };
+                    context.CreditCards.Add(creditCard);
+                    context.SaveChanges();
+
+                }
 
                creditCard.Balance = creditCard.Balance -rental.Amount;
                context.CreditCards.Update(creditCard);

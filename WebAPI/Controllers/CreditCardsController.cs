@@ -105,6 +105,19 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result);
+        } 
+        
+        [HttpPost("savecreditcard")]
+        public IActionResult SaveCreditCard(int customerId, string cardNumber)
+        {
+            var result = _creditCardService.SaveCreditCard(customerId, cardNumber);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
     }
 }

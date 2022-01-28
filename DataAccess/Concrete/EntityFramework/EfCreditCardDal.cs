@@ -30,5 +30,27 @@ namespace DataAccess.Concrete.EntityFramework
                 }
             }
         }
+
+        public CreditCard GetCreditCardByCardNumber(string cardNumber)
+        {
+            using(ReCapContext context = new ReCapContext())
+            {
+                var result = context.CreditCards.FirstOrDefault(c=>c.CardNumber==cardNumber);
+                return result;
+            }
+        }
+
+        public bool SaveCreditCard(int customerId, string cardNumber)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                var creditCard = GetCreditCardByCardNumber(cardNumber);
+                creditCard.CustomerId = customerId;
+                context.Update(creditCard);
+                context.SaveChanges();
+            }
+
+            return true;
+        }
     }
 }
