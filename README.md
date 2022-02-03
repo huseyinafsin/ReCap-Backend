@@ -39,9 +39,4 @@ N-tier architecture model provides creating flexible and reusable applications. 
 
 
 
-Integrated Development Environment : Visual Studio 2019
-
-
-## 📫 How to Reach Me
-
-[![Linkedin Badge](https://img.shields.io/badge/seymadonmez-follow%20on%20linkedin-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/seymadonmezz/)
+Integrated Development Environment : Visual Studio 2022
