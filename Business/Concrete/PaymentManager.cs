@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -38,7 +39,7 @@ public class PaymentManager : IPaymentService
         return new SuccessResult("Payment updated successful");
     }
 
-    public IDataResult<Payment> GetPaymentById(int paymentId)
+    public IDataResult<Payment> GetPaymentById(Guid paymentId)
     {
         return new SuccessDataResult<Payment>(_paymentDal.Get(p => p.Id == paymentId), "Payment fetched successful");
     }

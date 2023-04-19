@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -29,7 +30,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int userId)
+        public IActionResult GetById(Guid userId)
         {
             var result = _userService.GetUserById(userId);
 

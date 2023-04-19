@@ -54,7 +54,7 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<Color> GetColorById(int colorId)
+        public IDataResult<Color> GetColorById(Guid colorId)
         {
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == colorId), Messages.ColorFetched);
         }

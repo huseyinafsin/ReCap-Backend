@@ -57,7 +57,7 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<Brand> GetBrandById(int brandId)
+        public IDataResult<Brand> GetBrandById(Guid brandId)
         {
            return new SuccessDataResult<Brand>( _brandDal.Get(b => b.Id == brandId),Messages.BrandFetched);
         }

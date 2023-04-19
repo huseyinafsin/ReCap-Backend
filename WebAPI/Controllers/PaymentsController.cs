@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int paymentId)
+        public IActionResult GetById(Guid paymentId)
         {
             var result = _paymentService.GetPaymentById(paymentId);
 

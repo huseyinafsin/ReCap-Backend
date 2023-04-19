@@ -67,13 +67,13 @@ namespace Business.Concrete
 
         [CacheAspect]
         [SecuredOperation("admin,customer")]
-        public IDataResult<Rental> GetRentalById(int rentalId)
+        public IDataResult<Rental> GetRentalById(Guid rentalId)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(x => x.Id == rentalId), Messages.RentalFetched);
         }
 
   
-        public IDataResult<bool> IsRentable(int carId, DateTime rentDate, DateTime returnDate)
+        public IDataResult<bool> IsRentable(Guid carId, DateTime rentDate, DateTime returnDate)
         {
             var result = _rentalDal.GetAll(r => r.CarId == carId);
 

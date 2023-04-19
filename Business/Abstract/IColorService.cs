@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.Entities;
 using Core.Utilities.Results;
+using System;
 
 namespace Business.Abstract
 {
@@ -11,6 +12,6 @@ namespace Business.Abstract
         IResult AddColor(Color color);
         IResult DeleteColor(Color color);
         IResult UpdateColor(Color color);
-        IDataResult<Color> GetColorById(int colorId);
+        IDataResult<Color> GetColorById(Guid colorId);
     }
 }

@@ -26,7 +26,7 @@ namespace Core.Utilities.Helpers
             }
             return result.Path2;
         }
-        public static IResult Delete(string path)
+        public static Results.IResult Delete(string path)
         {
             try
             {

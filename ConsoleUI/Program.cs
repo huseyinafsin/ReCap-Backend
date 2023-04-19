@@ -75,13 +75,13 @@ namespace ConsoleUI
 
         private static void deleteCarTest(CarManager carManager)
         {
-            Car car = carManager.GetCarById(1).Data;
+            Car car = carManager.GetCarById(new Guid()).Data;
             carManager.DeleteCar(car);
         }
 
         private static void modifyCarTest(CarManager carManager)
         {
-            Car car = carManager.GetCarById(1).Data;
+            Car car = carManager.GetCarById(new Guid()).Data;
             car.ModelYear = 1999;
             carManager.UpdateCar(car);
         }
@@ -90,15 +90,15 @@ namespace ConsoleUI
         {
             Car car1 = new Car();
             car1.DaiyPrice = 25;
-            car1.BrandId = 1;
-            car1.ColorId = 1;
+            car1.BrandId =new Guid();
+            car1.ColorId = new Guid();
             car1.Description = "pahakı arac";
             car1.ModelYear = 2020;
 
             Car car2 = new Car();
             car2.DaiyPrice = 20;
-            car2.BrandId = 2;
-            car2.ColorId = 3;
+            car2.BrandId = new Guid();
+            car2.ColorId = new Guid();
             car2.Description = "Ucuz arac";
             car2.ModelYear = 2000;
             carManager.AddCar(car1);

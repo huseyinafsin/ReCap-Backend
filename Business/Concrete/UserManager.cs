@@ -54,7 +54,7 @@ namespace Business.Concrete
         }
 
 
-        [CacheAspect]
+        //[CacheAspect]
         //[SecuredOperation("admin,customer")]
         public User GetByMail(string email)
         {
@@ -71,7 +71,7 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<User> GetUserById(int userId)
+        public IDataResult<User> GetUserById(Guid userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(x => x.Id == userId), Messages.UserFetched);
         }

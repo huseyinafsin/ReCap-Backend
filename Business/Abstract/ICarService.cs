@@ -14,12 +14,12 @@ namespace Business.Abstract
         IResult AddCar(Car car);
         IResult DeleteCar(Car car);
         IResult UpdateCar(Car car);
-        IDataResult<Car> GetCarById(int carId);
-        IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId);
-        IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId);
+        IDataResult<Car> GetCarById(Guid carId);
+        IDataResult<List<CarDetailDto>> GetCarsByBrandId(Guid brandId);
+        IDataResult<List<CarDetailDto>> GetCarsByColorId(Guid colorId);
         IDataResult<List<CarDetailDto>> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
         IDataResult<List<CarDetailDto>> CarTopCarsDetails(int top);
-        IDataResult<CarDetailDto> CarDetailsById(int carId);
+        IDataResult<CarDetailDto> CarDetailsById(Guid carId);
 
     }
 }

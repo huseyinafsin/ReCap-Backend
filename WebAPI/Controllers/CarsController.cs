@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getbybrand")]
-        public IActionResult GetAllByBrandId(int brandId)
+        public IActionResult GetAllByBrandId(Guid brandId)
         {
             var result = _carService.GetCarsByBrandId(brandId);
 
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbycolor")]
-        public IActionResult GetAllByColorId(int colorId)
+        public IActionResult GetAllByColorId(Guid colorId)
         {
             var result = _carService.GetCarsByColorId(colorId);
 
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("cardetailsbyid")]
-        public IActionResult CarDetailsById(int carId)
+        public IActionResult CarDetailsById(Guid carId)
         {
             var result = _carService.CarDetailsById(carId);
 
@@ -99,7 +99,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int cardId)
+        public IActionResult GetById(Guid cardId)
         {
             var result = _carService.GetCarById(cardId);
 

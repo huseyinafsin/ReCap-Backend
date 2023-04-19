@@ -19,7 +19,7 @@ namespace Business.Concrete
             _carService = carService;
         }
 
-        public IDataResult<int> GetCustomerFindexScore(int customerId)
+        public IDataResult<int> GetCustomerFindexScore(Guid customerId)
         {
             var customerResult = IsCustomerIdExist(customerId);
             if (customerResult.Success)
@@ -33,7 +33,7 @@ namespace Business.Concrete
             return new ErrorDataResult<int>(-1, customerResult.Message);
         }
 
-        public IDataResult<int> GetCarMinFindexScore(int carId)
+        public IDataResult<int> GetCarMinFindexScore(Guid carId)
         {
             var carResult = _carService.GetCarById(carId);
             if (!carResult.Success)
@@ -44,7 +44,7 @@ namespace Business.Concrete
             return new SuccessDataResult<int>(carResult.Data.MinFindexScore);
         }
 
-        private IResult IsCustomerIdExist(int customerId)
+        private IResult IsCustomerIdExist(Guid customerId)
         {
             var result = _customerService.GetCustomerById(customerId);
             if (result.Success)

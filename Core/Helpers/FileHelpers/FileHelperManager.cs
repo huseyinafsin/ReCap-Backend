@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Utilities.Helpers.GuidHelpers;
 using Core.Utilities.Results;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +43,7 @@ namespace Core.Utilities.Helpers
 
         }
 
-        public static IResult Delete(string filePath)
+        public static Results.IResult Delete(string filePath)
         {
             var path = $"{RootDirectory}\\{filePath.Replace("/", "\\")}";
 

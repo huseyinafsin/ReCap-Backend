@@ -52,7 +52,7 @@ namespace Business.Concrete
                 _carDal.CarDetails().OrderBy(x=>x.DailyPrice).Take(top).ToList(), Messages.CarListed);
         }
 
-        public IDataResult<CarDetailDto> CarDetailsById(int carId)
+        public IDataResult<CarDetailDto> CarDetailsById(Guid carId)
         {
             return new SuccessDataResult<CarDetailDto>(_carDal.CarDetailsById(carId), Messages.CarListed);
         }
@@ -76,21 +76,21 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<Car> GetCarById(int carId)
+        public IDataResult<Car> GetCarById(Guid carId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId),Messages.CarAdded);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(Guid brandId)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.CarDetails(c=>c.BrandId == brandId),Messages.CarListed);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(Guid colorId)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.CarDetails(c=>c.ColorId == colorId),Messages.CarListed) ;
         }

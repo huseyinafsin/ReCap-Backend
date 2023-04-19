@@ -11,7 +11,7 @@ namespace DataAccess.Abstract
     {
         bool CheckCreditCard(CreditCard creditCard);
         CreditCard GetCreditCardByCardNumber(string cardNumber);
-        bool SaveCreditCard(int customerId,string cardNumber);
+        bool SaveCreditCard(Guid customerId,string cardNumber);
 
     }
 }

@@ -43,7 +43,7 @@ namespace Business.Concrete
             return new SuccessResult("Credit card updated successful");
         }
 
-        public IDataResult<CreditCard> GetCreditCardById(int creditCardId)
+        public IDataResult<CreditCard> GetCreditCardById(Guid creditCardId)
         {
             return new SuccessDataResult<CreditCard>(_creditCardDal.Get(c=>c.Id == creditCardId), "Credit card fetched successful");
         }
@@ -53,12 +53,12 @@ namespace Business.Concrete
             return new SuccessDataResult<bool>(_creditCardDal.CheckCreditCard(creditCard), "Credit card fetched successful");
         }
 
-        public IDataResult<List<CreditCard>> GetCardsByCustomerId(int customerId)
+        public IDataResult<List<CreditCard>> GetCardsByCustomerId(Guid customerId)
         {
             return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(c=>c.CustomerId==customerId), "Credit Cards Listed");
         }
 
-        public IDataResult<bool> SaveCreditCard(int customerId, string cardNumber)
+        public IDataResult<bool> SaveCreditCard(Guid customerId, string cardNumber)
         {
             return new SuccessDataResult<bool>(_creditCardDal.SaveCreditCard(customerId, cardNumber), Messages.CreditCardSaved);
         }

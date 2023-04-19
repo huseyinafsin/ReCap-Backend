@@ -42,7 +42,7 @@ namespace Business.Concrete
             return new SuccessResult("Mail updated");
         }
 
-        public IDataResult<MailSubscribe> GetMailById(int mailId)
+        public IDataResult<MailSubscribe> GetMailById(Guid mailId)
         {
             return new SuccessDataResult<MailSubscribe>(_mailSubscriberDal.Get(m=>m.Id==mailId));
         }

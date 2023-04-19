@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int rentalId)
+        public IActionResult GetById(Guid rentalId)
         {
             var result = _rentalService.GetRentalById(rentalId);
 
@@ -108,7 +108,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("isrentable")]
-        public IActionResult CheckCanRent(int carId, DateTime rentDate, DateTime returnDate)
+        public IActionResult CheckCanRent(Guid carId, DateTime rentDate, DateTime returnDate)
         {
             var result = _rentalService.IsRentable(carId,  rentDate,  returnDate);
 

@@ -14,8 +14,8 @@ namespace Entities.DTOs
         public string ExpiredMonth { get; set; }
         public string Cvc { get; set; }
         public decimal Amount { get; set; }
-        public int CarId { get; set; }
-        public int CustomerId { get; set; }
+        public Guid CarId { get; set; }
+        public Guid CustomerId { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime ReturnDate { get; set; }
     }

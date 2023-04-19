@@ -88,7 +88,7 @@ namespace Business.Concrete
 
         [CacheAspect()]
         [SecuredOperation("admin,customer")]
-        public IDataResult<Customer> GetCustomerById(int customerId)
+        public IDataResult<Customer> GetCustomerById(Guid customerId)
         {
             var result = _customerDal.Get(c => c.Id == customerId);
             if (result != null)
@@ -114,7 +114,7 @@ namespace Business.Concrete
 
         [CacheAspect()]
         [SecuredOperation("admin,customer")]
-        public IDataResult<CustomerDetailDto> GetWithDetails(int customerId)
+        public IDataResult<CustomerDetailDto> GetWithDetails(Guid customerId)
         {
             var result = _customerDal.GetWithDetails(c=>c.CustomerId==customerId);
             if (result != null)
@@ -142,7 +142,7 @@ namespace Business.Concrete
         }
 
 
-        private IResult CheckIfCustomerIdExist(int customerId)
+        private IResult CheckIfCustomerIdExist(Guid customerId)
         {
             var result = _customerDal.GetAll(c => c.Id == customerId).Any();
             if (!result)
@@ -152,7 +152,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfUserIdExist(int userId)
+        private IResult CheckIfUserIdExist(Guid userId)
         {
             var result = _customerDal.GetAll(c => c.UserId == userId).Any();
             if (result)
@@ -162,7 +162,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfUserIdValid(int userId)
+        private IResult CheckIfUserIdValid(Guid userId)
         {
             var result = _userService.GetUserById(userId);
             if (!result.Success)
@@ -184,7 +184,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public int GetFindexScore(int customerId)
+        public int GetFindexScore(Guid customerId)
         {
             return _customerDal.GetWithDetails(c=>c.CustomerId==customerId).FindexScore;
         }

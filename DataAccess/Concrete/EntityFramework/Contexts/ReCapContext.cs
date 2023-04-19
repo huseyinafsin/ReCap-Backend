@@ -13,9 +13,8 @@ namespace DataAccess.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-KRNCUB4\SQLEXPRESS;Database=ReCap;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=LPTNET2116\SQLEXPRESS;Database=ReCap;Trusted_Connection=True;");
         }
-
 
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Color>  Colors { get; set; }
@@ -29,6 +28,10 @@ namespace DataAccess.Concrete
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<CreditCard> CreditCards { get; set; }
         public virtual DbSet<MailSubscribe> MailSubscribes { get; set; }
+        public virtual DbSet<Translation> Translations { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+
 
 
     }

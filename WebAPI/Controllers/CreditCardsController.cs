@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
         }
         
         [HttpGet("getcardsbycustomerId")]
-        public IActionResult GetCardsByCustomerId(int customerId)
+        public IActionResult GetCardsByCustomerId(Guid customerId)
         {
             var result = _creditCardService.GetCardsByCustomerId(customerId);
 
@@ -43,7 +44,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int creditCardId)
+        public IActionResult GetById(Guid creditCardId)
         {
             var result = _creditCardService.GetCreditCardById(creditCardId);
 
@@ -108,7 +109,7 @@ namespace WebAPI.Controllers
         } 
         
         [HttpPost("savecreditcard")]
-        public IActionResult SaveCreditCard(int customerId, string cardNumber)
+        public IActionResult SaveCreditCard(Guid customerId, string cardNumber)
         {
             var result = _creditCardService.SaveCreditCard(customerId, cardNumber);
 

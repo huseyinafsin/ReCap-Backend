@@ -18,10 +18,10 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>{
 
-                new Car{ Id=1, BrandId=1,   ColorId=2,  ModelYear=2016, DaiyPrice=500,    Description="araçlarımızı kalitelidir"},
-                new Car{ Id=2, BrandId=2,   ColorId=1,  ModelYear=2005, DaiyPrice=900,    Description="araçlarımızı kalitelidir"},
-                new Car{ Id=3, BrandId=3,   ColorId=2,  ModelYear=2022, DaiyPrice=65,    Description="araçlarımızı kalitelidir"},
-                new Car{ Id=4, BrandId=3,   ColorId=3,  ModelYear=2015, DaiyPrice=956,    Description="araçlarımızı kalitelidir"}
+                new Car{ Id=new Guid(), BrandId=new Guid(),   ColorId=new Guid(),  ModelYear=2016, DaiyPrice=500,    Description="araçlarımızı kalitelidir"},
+                new Car{ Id=new Guid(), BrandId=new Guid(),   ColorId=new Guid(),  ModelYear=2005, DaiyPrice=900,    Description="araçlarımızı kalitelidir"},
+                new Car{ Id=new Guid(), BrandId=new Guid(),   ColorId=new Guid(),  ModelYear=2022, DaiyPrice=65,    Description="araçlarımızı kalitelidir"},
+                new Car{ Id=new Guid(), BrandId=new Guid(),   ColorId=new Guid(),  ModelYear=2015, DaiyPrice=956,    Description="araçlarımızı kalitelidir"}
             };
         }
 
@@ -37,7 +37,7 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public CarDetailDto CarDetailsById(int carId)
+        public CarDetailDto CarDetailsById(Guid carId)
         {
             throw new NotImplementedException();
         }
@@ -64,7 +64,7 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public Car GetById(int id)
+        public Car GetById(Guid id)
         {
             return _cars.Single(x => x.Id == id);
         }

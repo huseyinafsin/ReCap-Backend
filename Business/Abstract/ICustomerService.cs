@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using Entities.Concrete;
 using System.Collections.Generic;
 using Entities.DTOs;
+using System;
 
 namespace Business.Abstract
 {
@@ -13,8 +14,8 @@ namespace Business.Abstract
         IResult AddCustomer(Customer customer);
         IResult DeleteCustomer(Customer customer);
         IResult UpdateCustomer(Customer customer);
-        IDataResult<Customer> GetCustomerById(int customerId);
-        int GetFindexScore(int customerId);
+        IDataResult<Customer> GetCustomerById(Guid customerId);
+        int GetFindexScore(Guid customerId);
         IDataResult<CustomerDetailDto> GetDetailsByMail(string email);
     }
 }

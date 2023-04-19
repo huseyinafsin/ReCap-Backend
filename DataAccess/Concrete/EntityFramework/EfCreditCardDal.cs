@@ -40,7 +40,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public bool SaveCreditCard(int customerId, string cardNumber)
+        public bool SaveCreditCard(Guid customerId, string cardNumber)
         {
             using (ReCapContext context = new ReCapContext())
             {

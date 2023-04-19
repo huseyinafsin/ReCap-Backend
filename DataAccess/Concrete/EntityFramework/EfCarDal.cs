@@ -47,7 +47,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public CarDetailDto CarDetailsById(int carId)
+        public CarDetailDto CarDetailsById(Guid carId)
         {
             using (ReCapContext context = new ReCapContext())
             {

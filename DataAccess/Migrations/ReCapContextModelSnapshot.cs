@@ -24,11 +24,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.OperationClaim", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -40,11 +38,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -71,17 +67,15 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.UserOperationClaim", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("OperationClaimId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("OperationClaimId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -90,11 +84,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Brand", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -106,20 +98,18 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Car", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CarName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ColorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("DaiyPrice")
                         .HasColumnType("decimal(18,4)");
@@ -140,14 +130,12 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.CarImage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -162,11 +150,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Color", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -178,11 +164,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.CreditCard", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,4)");
@@ -193,6 +177,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Cvc")
                         .HasColumnType("nvarchar(max)");
 
@@ -202,9 +189,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("ExpireYear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("CreditCards");
@@ -212,11 +196,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
@@ -224,8 +206,8 @@ namespace DataAccess.Migrations
                     b.Property<int>("FindexScore")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -234,11 +216,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.MailSubscribe", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -250,20 +230,18 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<int>("CreditCardId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CreditCardId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -275,23 +253,21 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Rental", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool?>("DeliveryStatus")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PaymentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("RentDate")
                         .HasColumnType("datetime2");

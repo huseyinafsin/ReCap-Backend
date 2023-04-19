@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Business;
-using Core.Utilities.Helpers;
 using Core.Utilities.Results;
+using Core.Utilities.Helpers;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
+using Http=Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
 {
@@ -32,7 +29,7 @@ namespace Business.Concrete
 
         [SecuredOperation("carimage.add,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
-        public IResult AddCarImage(CarImage carImage, IFormFile file)
+        public IResult AddCarImage(CarImage carImage, Http.IFormFile file)
         {
             var result = BusinessRules.Run(CheckImageRestriction(carImage.CarId));
 
@@ -77,7 +74,7 @@ namespace Business.Concrete
 
         [SecuredOperation("carimage.update,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
-        public IResult UpdateCarImage(CarImage carImage, IFormFile file)
+        public IResult UpdateCarImage(CarImage carImage, Http.IFormFile file)
         {
           
             var filePath=  _carImageDal.Get(i => i.Id == carImage.Id);
@@ -100,19 +97,19 @@ namespace Business.Concrete
 
         //[SecuredOperation("carimage.getcarimagebyid,customer,admin")]
         [CacheAspect]
-        public IDataResult<CarImage> GetCarImageById(int carImageId)
+        public IDataResult<CarImage> GetCarImageById(Guid carImageId)
         {
            return new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.Id == carImageId));
         }
 
         //[SecuredOperation("carimage.getallcarimagesbycarid,customer,admin")]
         [CacheAspect]
-        public IDataResult<List<CarImage>> GetAllCarImagesByCarId(int carId)
+        public IDataResult<List<CarImage>> GetAllCarImagesByCarId(Guid carId)
         {
             var result = new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(x => x.CarId == carId));
             if (result.Data.Count==0)
             {
-               result.Data.Add(_carImageDal.Get(x=>x.Id ==1));
+               result.Data.Add(_carImageDal.Get(x=>x.Id ==Guid.Empty));
 
                return result;
             }
@@ -122,7 +119,7 @@ namespace Business.Concrete
         
 
         // ------ Business Rules ca
-        private IResult CheckImageRestriction(int carID)
+        private IResult CheckImageRestriction(Guid carID)
         {
             var result = _carImageDal.GetAll(c => c.CarId == carID).Count;
 

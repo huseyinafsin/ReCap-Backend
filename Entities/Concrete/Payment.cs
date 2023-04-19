@@ -8,11 +8,11 @@ using Core.Entities;
 
 namespace Entities.Concrete
 {
-    public class Payment : IEntity
+    public class Payment : BaseEntity
     {
-        public int Id { get; set; }
-        public int CreditCardId { get; set; }
-        public int CustomerId { get; set; }
+
+        public Guid CreditCardId { get; set; }
+        public Guid CustomerId { get; set; }
         [Column(TypeName = "decimal(18,4)")]
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; } = DateTime.Now;

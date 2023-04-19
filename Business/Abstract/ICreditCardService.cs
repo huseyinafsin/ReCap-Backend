@@ -11,12 +11,12 @@ namespace Business.Abstract
     public interface ICreditCardService
     {
         IDataResult<List<CreditCard>> GetAllCreditCard();
-        IDataResult<List<CreditCard>> GetCardsByCustomerId(int customerId);
+        IDataResult<List<CreditCard>> GetCardsByCustomerId(Guid customerId);
         IResult AddCreditCard(CreditCard creditCard);
         IResult DeleteCreditCard(CreditCard creditCard);
         IResult UpdateCreditCard(CreditCard creditCard);
-        IDataResult<CreditCard> GetCreditCardById(int creditCardId);
+        IDataResult<CreditCard> GetCreditCardById(Guid creditCardId);
         IDataResult<bool> CheckCreditCard(CreditCard creditCard);
-        IDataResult<bool> SaveCreditCard(int customerId, string cardNumber);
+        IDataResult<bool> SaveCreditCard(Guid customerId, string cardNumber);
     }
 }

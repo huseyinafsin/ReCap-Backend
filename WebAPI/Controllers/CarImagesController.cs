@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getallcarimagesbyid")]
-        public IActionResult GetAllCarImagesByCarId(int carId)
+        public IActionResult GetAllCarImagesByCarId(Guid carId)
         {
             var result = _carImageService.GetAllCarImagesByCarId(carId);
 
@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int imageId)
+        public IActionResult GetById(Guid imageId)
         {
             var result = _carImageService.GetCarImageById(imageId);
 

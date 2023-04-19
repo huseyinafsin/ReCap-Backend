@@ -9,7 +9,7 @@ namespace Business.Abstract
 {
     public interface IFindexService
     {
-        IDataResult<int> GetCustomerFindexScore(int customerId);
-        IDataResult<int> GetCarMinFindexScore(int carId);
+        IDataResult<int> GetCustomerFindexScore(Guid customerId);
+        IDataResult<int> GetCarMinFindexScore(Guid carId);
     }
 }

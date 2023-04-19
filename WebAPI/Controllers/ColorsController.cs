@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.Abstract;
 using Entities.Concrete;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -28,7 +29,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int colorId)
+        public IActionResult GetById(Guid colorId)
         {
             var result = _colorService.GetColorById(colorId);
 

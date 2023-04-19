@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int customerId)
+        public IActionResult GetById(Guid customerId)
         {
             var result = _customerService.GetCustomerById(customerId);
 
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
         }     
         
         [HttpGet("getfindexscore")]
-        public IActionResult GetFindex(int customerId)
+        public IActionResult GetFindex(Guid customerId)
         {
             var result = _customerService.GetFindexScore(customerId);
 
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         } 
         
         [HttpGet("getwithdetails")]
-        public IActionResult GetWithDetails(int customerId)
+        public IActionResult GetWithDetails(Guid customerId)
         {
             var result = _customerService.GetCustomerById(customerId);
 

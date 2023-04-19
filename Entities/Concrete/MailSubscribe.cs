@@ -8,10 +8,9 @@ using Core.Entities;
 
 namespace Entities.Concrete
 {
-    public class MailSubscribe : IEntity
+    public class MailSubscribe : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+
         public string Email { get; set; }
     }
 }
