@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface IMailSubscriberDal : IEntityRepository<MailSubscribe>
+    public interface IMailSubscriberDal : IRepository<MailSubscribe>
     {
     }
 }

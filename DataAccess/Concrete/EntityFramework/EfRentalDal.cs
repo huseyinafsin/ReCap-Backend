@@ -11,13 +11,15 @@ using Entities.DTOs;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfRentalDal : EfEntityRepositoryBase<Rental,ReCapContext>, IRentalDal
+    public class EfRentalDal : Repository<Rental>, IRentalDal
     {
         private readonly EfCreditCardDal efCreditCardDal;
 
-        public EfRentalDal(EfCreditCardDal efCreditCardDal)
+
+        public EfRentalDal(EfCreditCardDal efCreditCardDal) 
         {
             this.efCreditCardDal = efCreditCardDal;
+
         }
 
         List<RentalDetailDto> IRentalDal.RentalDetails()

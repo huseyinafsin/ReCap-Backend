@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -31,9 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid mailId)
+        public async Task<IActionResult> GetByIdAsync(Guid mailId)
         {
-            var result = _mailSubscribeService.GetMailById(mailId);
+            var result =await _mailSubscribeService.GetMailByIdAsync(mailId);
 
             if (result.Success)
             {

@@ -4,17 +4,18 @@ using Entities.Concrete;
 using System.Collections.Generic;
 using Entities.DTOs;
 using System;
+using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
     public interface ICustomerService
     {
-        IDataResult<List<Customer>> GetAllCustomers();
+        Task<IDataResult<List<Customer>>> GetAllCustomers();
         IDataResult<List<CustomerDetailDto>> GetAllWithDetails();
-        IResult AddCustomer(Customer customer);
-        IResult DeleteCustomer(Customer customer);
+        Task<IResult> AddCustomer(Customer customer);
+        Task<IResult> DeleteCustomer(Customer customer);
         IResult UpdateCustomer(Customer customer);
-        IDataResult<Customer> GetCustomerById(Guid customerId);
+        Task<IDataResult<Customer>> GetCustomerById(Guid customerId);
         int GetFindexScore(Guid customerId);
         IDataResult<CustomerDetailDto> GetDetailsByMail(string email);
     }

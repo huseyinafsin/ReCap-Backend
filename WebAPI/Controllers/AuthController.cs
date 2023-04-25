@@ -22,9 +22,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult Login(UserForLoginDto userForLoginDto)
+        public async Task<ActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userToLogin = _authService.Login(userForLoginDto);
+            var userToLogin =await _authService.LoginAsync(userForLoginDto);
             if (!userToLogin.Success)
             {
                 return BadRequest(userToLogin.Message);
@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
         }      
         
         [HttpPost("customerregister")]
-        public ActionResult CustomerRegister(CustomerForRegister customerForRegister)
+        public async Task<ActionResult> CustomerRegisterAsync(CustomerForRegister customerForRegister)
         {
             var userExists = _authService.UserExists(customerForRegister.Email);
             if (userExists.Success)
@@ -68,8 +68,8 @@ namespace WebAPI.Controllers
                 return BadRequest(userExists.Message);
             }
 
-            var registerResult = _authService.CustomerRegister(customerForRegister, customerForRegister.Password);
-            var user = _userService.GetUserById(registerResult.Data.UserId);
+            var registerResult =await _authService.CustomerRegister(customerForRegister, customerForRegister.Password);
+            var user =await _userService.GetUserById(registerResult.Data.UserId);
             var result = _authService.CreateAccessToken(user.Data);
             if (result.Success)
             {

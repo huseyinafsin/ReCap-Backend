@@ -7,7 +7,7 @@ using Core.DataAccess.EntityFramework;
 
 namespace DataAccess.Abstract
 { 
-    public interface ICreditCardDal : IEntityRepository<CreditCard>
+    public interface ICreditCardDal : IRepository<CreditCard>
     {
         bool CheckCreditCard(CreditCard creditCard);
         CreditCard GetCreditCardByCardNumber(string cardNumber);

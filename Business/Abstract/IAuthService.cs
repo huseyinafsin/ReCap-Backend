@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using Core.Utilities.Security.JWT;
 using Entities.Concrete;
 using Entities.DTOs;
+using Core.Entities.Concrete;
 
 namespace Business.Abstract
 {
     public interface IAuthService
     {
         IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);
-        IDataResult<Customer> CustomerRegister(CustomerForRegister customerForRegister, string password);
-        IDataResult<User> Login(UserForLoginDto userForLoginDto);
+        Task<IDataResult<Customer>> CustomerRegister(CustomerForRegister customerForRegister, string password);
+        Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto);
         IResult UserExists(string email);
         IDataResult<AccessToken> CreateAccessToken(User user);
     }

@@ -8,7 +8,7 @@ using Core.DataAccess;
 
 namespace DataAccess.Abstract
 {
-    public interface IBrandDal : IEntityRepository<Brand>
+    public interface IBrandDal : IRepository<Brand>
     {
     }
 }

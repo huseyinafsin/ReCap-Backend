@@ -21,18 +21,19 @@ namespace Business.Concrete
 
         public IDataResult<List<MailSubscribe>> GetAllMails()
         {
-            return new SuccessDataResult<List<MailSubscribe>>(_mailSubscriberDal.GetAll(), "Mails Listed");
+            var result = _mailSubscriberDal.GetAll();
+            return new SuccessDataResult<List<MailSubscribe>>( "Mails Listed");
         }
 
         public IResult AddMail(MailSubscribe mailSubscribe)
         {
-            _mailSubscriberDal.Add(mailSubscribe);
+            _mailSubscriberDal.AddAsync(mailSubscribe);
             return new SuccessResult("Mail added");
         }
 
         public IResult DeleteMail(MailSubscribe mailSubscribe)
         {
-            _mailSubscriberDal.Delete(mailSubscribe);
+            _mailSubscriberDal.Remove(mailSubscribe);
             return new SuccessResult("Mail deleted");
         }
 
@@ -42,9 +43,9 @@ namespace Business.Concrete
             return new SuccessResult("Mail updated");
         }
 
-        public IDataResult<MailSubscribe> GetMailById(Guid mailId)
+        public async Task<IDataResult<MailSubscribe>> GetMailByIdAsync(Guid mailId)
         {
-            return new SuccessDataResult<MailSubscribe>(_mailSubscriberDal.Get(m=>m.Id==mailId));
+            return new SuccessDataResult<MailSubscribe>(await _mailSubscriberDal.GetAsync(m=>m.Id==mailId));
         }
     }
 }

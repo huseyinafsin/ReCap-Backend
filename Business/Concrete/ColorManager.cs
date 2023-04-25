@@ -13,6 +13,7 @@ using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities;
 using Core.Utilities.Results;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -26,37 +27,39 @@ namespace Business.Concrete
         }
 
 
-        [CacheRemoveAspect("IColorService.Get")] [SecuredOperation("admin,customer")]
+        [CacheRemoveAspect("IColorService.Get")]
+        //[SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(ColorValidator))]
-        public IResult AddColor(Color color)
+        public IResult AddColor(ColorDto color)
         {
-
-            _colorDal.Add(color);
+            var newColor = new Color() { Name= color.Name };
+            _colorDal.AddAsync(newColor);
             return new SuccessResult(Messages.ColorAdded);
         }
 
         [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("admin,customer")]
+        //[SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(ColorValidator))]
-        public IResult DeleteColor(Color color)
+        public async Task<IResult> DeleteColor(Guid id)
         {
-
-            _colorDal.Delete(color);
+            var color =await _colorDal.GetAsync(x=>x.Id==id);
+            _colorDal.Remove(color);
             return new SuccessResult(Messages.ColorDeleted);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<List<Color>> GetAllColors()
+        public async Task<IDataResult<List<Color>>> GetAllColorsAsync()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorListed);
+            var result =await _colorDal.GetAll();
+            return new SuccessDataResult<List<Color>>(result, Messages.ColorListed);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<Color> GetColorById(Guid colorId)
+        public async Task<IDataResult<Color>> GetColorById(Guid colorId)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == colorId), Messages.ColorFetched);
+            return new SuccessDataResult<Color>(await _colorDal.GetAsync(c => c.Id == colorId), Messages.ColorFetched);
         }
 
         [CacheRemoveAspect("IColorService.Get")]

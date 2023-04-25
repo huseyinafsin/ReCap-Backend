@@ -5,16 +5,17 @@ using Core.Entities;
 using Core.Utilities.Results;
 using System.Linq.Expressions;
 using System;
+using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
     public interface ICarService
     {
-        IDataResult<List<Car>> GetAllCars();
+        Task<IDataResult<List<Car>>> GetAllCars();
         IResult AddCar(Car car);
         IResult DeleteCar(Car car);
         IResult UpdateCar(Car car);
-        IDataResult<Car> GetCarById(Guid carId);
+        Task<IDataResult<Car>> GetCarById(Guid carId);
         IDataResult<List<CarDetailDto>> GetCarsByBrandId(Guid brandId);
         IDataResult<List<CarDetailDto>> GetCarsByColorId(Guid colorId);
         IDataResult<List<CarDetailDto>> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);

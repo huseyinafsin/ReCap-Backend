@@ -13,6 +13,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
+using Entities.Concrete;
 
 namespace Business.Concrete
 {
@@ -31,7 +32,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(UserValidator))]
         public IResult AddUser(User user)
         {
-            _userDal.Add(user);
+            _userDal.Remove(user);
             return new SuccessResult(Messages.UserAdded);
         }
 
@@ -41,24 +42,24 @@ namespace Business.Concrete
         [ValidationAspect(typeof(UserValidator))]
         public IResult DeleteUser(User user)
         {
-            _userDal.Delete(user);
+            _userDal.Remove(user);
             return new SuccessResult(Messages.UserDeleted);
         }
 
 
         [CacheAspect]
         [SecuredOperation("admin,customer")]
-        public IDataResult<List<User>> GetAllUsers()
+        public async Task<IDataResult<List<User>>> GetAllUsers()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UserListed);
+            return new SuccessDataResult<List<User>>(await _userDal.GetAll(), Messages.UserListed);
         }
 
 
         //[CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public User GetByMail(string email)
+        public async Task<User> GetByMail(string email)
         {
-            return _userDal.Get(u => u.Email == email);
+            return await _userDal.GetAsync(u => u.Email == email);
         }
 
 
@@ -71,9 +72,9 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<User> GetUserById(Guid userId)
+        public async Task<IDataResult<User>> GetUserById(Guid userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(x => x.Id == userId), Messages.UserFetched);
+            return new SuccessDataResult<User>(await _userDal.GetAsync(x => x.Id == userId), Messages.UserFetched);
         }
 
 

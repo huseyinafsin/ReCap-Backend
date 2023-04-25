@@ -31,6 +31,13 @@ namespace DataAccess.Concrete
         public virtual DbSet<Translation> Translations { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<CarType> CarTypes { get; set; }
+        public virtual DbSet<FuelType> FuelTypes { get; set; }
+        public virtual DbSet<GearType> GearTypes { get; set; }
+        public virtual DbSet<InsuranceType> InsuranceTypes { get; set; }
+
+
+
 
 
 

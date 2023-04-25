@@ -5,6 +5,7 @@ using Entities.DTOs;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -19,9 +20,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _carService.GetAllCars();
+            var result =await _carService.GetAllCars();
 
             if (result.Success)
             {
@@ -99,9 +100,9 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid cardId)
+        public async Task<IActionResult> GetById(Guid cardId)
         {
-            var result = _carService.GetCarById(cardId);
+            var result =await _carService.GetCarById(cardId);
 
             if (result.Success)
             {

@@ -9,7 +9,10 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfMailSubscribeDal :EfEntityRepositoryBase<MailSubscribe, ReCapContext>, IMailSubscriberDal
+    public class EfMailSubscribeDal : Repository<MailSubscribe>, IMailSubscriberDal
     {
+        public EfMailSubscribeDal()
+        {
+        }
     }
 }

@@ -14,6 +14,6 @@ namespace Business.Abstract
         IResult AddMail(MailSubscribe mailSubscribe);
         IResult DeleteMail(MailSubscribe mailSubscribe);
         IResult UpdateMail(MailSubscribe mailSubscribe);
-        IDataResult<MailSubscribe> GetMailById(Guid mailId);
+        Task<IDataResult<MailSubscribe>> GetMailByIdAsync(Guid mailId);
     }
 }

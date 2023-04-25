@@ -35,7 +35,7 @@ namespace Business.Concrete
 
         public IDataResult<int> GetCarMinFindexScore(Guid carId)
         {
-            var carResult = _carService.GetCarById(carId);
+            var carResult = _carService.GetCarById(carId).Result;
             if (!carResult.Success)
             {
                 return new ErrorDataResult<int>(-1, carResult.Message);
@@ -46,7 +46,7 @@ namespace Business.Concrete
 
         private IResult IsCustomerIdExist(Guid customerId)
         {
-            var result = _customerService.GetCustomerById(customerId);
+            var result = _customerService.GetCustomerById(customerId).Result;
             if (result.Success)
             {
                 return new SuccessResult();

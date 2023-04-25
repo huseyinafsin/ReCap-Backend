@@ -33,7 +33,7 @@ namespace Business.Concrete
         public IResult AddCar( Car car)
         {
           
-            _carDal.Add(car);
+            _carDal.AddAsync(car);
             return new SuccessResult(Messages.CarAdded);
         }
 
@@ -63,22 +63,22 @@ namespace Business.Concrete
         public IResult DeleteCar(Car car)
         {
 
-            _carDal.Delete(car);
+            _carDal.Remove(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<List<Car>> GetAllCars()
+        public async Task<IDataResult<List<Car>>> GetAllCars()
         {
-          return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
+          return new SuccessDataResult<List<Car>>(await _carDal.GetAll(),Messages.CarListed);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<Car> GetCarById(Guid carId)
+        public async Task<IDataResult<Car>> GetCarById(Guid carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId),Messages.CarAdded);
+            return new SuccessDataResult<Car>(await _carDal.GetAsync(c => c.Id == carId),Messages.CarAdded);
         }
 
         [CacheAspect]

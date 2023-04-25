@@ -20,9 +20,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _customerService.GetAllCustomers();
+            var result =await _customerService.GetAllCustomers();
 
             if (result.Success)
             {
@@ -46,9 +46,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid customerId)
+        public async Task<IActionResult> GetById(Guid customerId)
         {
-            var result = _customerService.GetCustomerById(customerId);
+            var result =await _customerService.GetCustomerById(customerId);
 
             if (result.Success)
             {
@@ -85,9 +85,9 @@ namespace WebAPI.Controllers
         } 
         
         [HttpGet("getwithdetails")]
-        public IActionResult GetWithDetails(Guid customerId)
+        public async Task<IActionResult> GetWithDetails(Guid customerId)
         {
-            var result = _customerService.GetCustomerById(customerId);
+            var result =await _customerService.GetCustomerById(customerId);
 
             if (result.Success)
             {
@@ -98,9 +98,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Customer customer)
+        public async Task<IActionResult> Add(Customer customer)
         {   
-            var result = _customerService.AddCustomer(customer);
+            var result =await _customerService.AddCustomer(customer);
 
             if (result.Success)
             {
@@ -111,9 +111,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(Customer customer)
+        public async Task<IActionResult> Delete(Customer customer)
         {
-            var result = _customerService.DeleteCustomer(customer);
+            var result =await _customerService.DeleteCustomer(customer);
 
             if (result.Success)
             {

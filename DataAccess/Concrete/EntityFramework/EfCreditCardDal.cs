@@ -9,8 +9,12 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCreditCardDal : EfEntityRepositoryBase<CreditCard, ReCapContext>, ICreditCardDal
+    public class EfCreditCardDal : Repository<CreditCard>, ICreditCardDal
     {
+        public EfCreditCardDal()
+        {
+        }
+
         public bool CheckCreditCard(CreditCard creditCard)
         {
             using (ReCapContext context =new ReCapContext())

@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal : IEntityRepository<Car>
+    public interface ICarDal : IRepository<Car>
     {  
         //List<CarDetailDto> CarDetails(CarDetailFilter filter);
         List<CarDetailDto> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);

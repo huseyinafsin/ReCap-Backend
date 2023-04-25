@@ -42,16 +42,16 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICustomerService.Get")]
         //[SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(CustomerDtoValidator))]
-        public IResult AddCustomer(Customer customer)
+        public async Task<IResult> AddCustomer(Customer customer)
         {
-            var rulesResult = BusinessRules.Run(CheckIfUserIdValid(customer.UserId), CheckIfUserIdExist(customer.UserId));
+            var rulesResult = BusinessRules.Run((Task<IResult>)CheckIfUserIdValidAsync(customer.UserId), CheckIfUserIdExist(customer.UserId));
             if (rulesResult != null)
             {
                 return new ErrorResult( rulesResult.Message);
             }
 
-            _customerDal.Add(customer);
-            var result = _customerDal.Get(c => c.UserId == customer.UserId && c.CompanyName == customer.CompanyName);
+            _customerDal.AddAsync(customer);
+            var result =await _customerDal.GetAsync(c => c.UserId == customer.UserId && c.CompanyName == customer.CompanyName);
             if (result != null)
             {
                 return new SuccessDataResult<Customer>(result, Messages.CustomerAdded);
@@ -64,33 +64,35 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICustomerService.Get")]
         [SecuredOperation("admin,customer")]
         //[ValidationAspect(typeof(CustomerValidator))]
-        public IResult DeleteCustomer(Customer customer)
+        public async Task<IResult> DeleteCustomer(Customer customer)
         {
 
-            var rulesResult = BusinessRules.Run(CheckIfCustomerIdExist(customer.Id));
+            var rulesResult = BusinessRules.Run((Task<IResult>)CheckIfCustomerIdExist(customer.Id));
             if (rulesResult != null)
             {
                 return rulesResult;
             }
 
-            var deletedCustomer = _customerDal.Get(c => c.Id == customer.Id);
-            _customerDal.Delete(deletedCustomer);
+            var deletedCustomer =await _customerDal.GetAsync(c => c.Id == customer.Id);
+            _customerDal.Remove(deletedCustomer);
             return new SuccessResult(Messages.CustomerDeleted);
         }
 
 
         [CacheAspect(10)]
         [SecuredOperation("admin")]
-        public IDataResult<List<Customer>> GetAllCustomers()
+        public async Task<IDataResult<List<Customer>>> GetAllCustomers()
         {
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(),Messages.CustomerListed);
+            var result = await _customerDal.GetAll();
+
+            return new SuccessDataResult<List<Customer>>(result,Messages.CustomerListed);
         }
 
         [CacheAspect()]
         [SecuredOperation("admin,customer")]
-        public IDataResult<Customer> GetCustomerById(Guid customerId)
+        public async Task<IDataResult<Customer>> GetCustomerById(Guid customerId)
         {
-            var result = _customerDal.Get(c => c.Id == customerId);
+            var result =await _customerDal.GetAsync(c => c.Id == customerId);
             if (result != null)
             {
                 return new SuccessDataResult<Customer>(result, Messages.CustomerListed);
@@ -131,7 +133,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult UpdateCustomer(Customer customer)
         {
-            var rulesResult = BusinessRules.Run(CheckIfCustomerIdExist(customer.Id));
+            var rulesResult = BusinessRules.Run((Task<IResult>)CheckIfCustomerIdExist(customer.Id));
             if (rulesResult != null)
             {
                 return rulesResult;
@@ -144,7 +146,7 @@ namespace Business.Concrete
 
         private IResult CheckIfCustomerIdExist(Guid customerId)
         {
-            var result = _customerDal.GetAll(c => c.Id == customerId).Any();
+            var result = _customerDal.GetAll(c => c.Id == customerId).Result.Any();
             if (!result)
             {
                 return new ErrorResult(Messages.CustomerNotExist);
@@ -154,7 +156,7 @@ namespace Business.Concrete
 
         private IResult CheckIfUserIdExist(Guid userId)
         {
-            var result = _customerDal.GetAll(c => c.UserId == userId).Any();
+            var result = _customerDal.GetAll(c => c.UserId == userId).Result.Any();
             if (result)
             {
                 return new ErrorResult(Messages.UserAlreadyCustomer);
@@ -162,9 +164,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfUserIdValid(Guid userId)
+        private async Task<IResult> CheckIfUserIdValidAsync(Guid userId)
         {
-            var result = _userService.GetUserById(userId);
+            var result =await _userService.GetUserById(userId);
             if (!result.Success)
             {
                 return new ErrorResult(Messages.UserNotExist);

@@ -7,6 +7,7 @@ using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using Entities.Concrete;
 using Entities.DTOs;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -39,7 +40,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
-        public IDataResult<Customer> CustomerRegister(CustomerForRegister customerForRegister, string password)
+        public async Task<IDataResult<Customer>> CustomerRegister(CustomerForRegister customerForRegister, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -60,7 +61,7 @@ namespace Business.Concrete
                 UserId = user.Id
             };
 
-            var result = _customerService.AddCustomer(customer);
+            var result =await _customerService.AddCustomer(customer);
 
             if (result.Success)
             {
@@ -71,9 +72,9 @@ namespace Business.Concrete
             return new ErrorDataResult<Customer>(Messages.UserNotAdded);
         }
 
-        public IDataResult<User> Login(UserForLoginDto userForLoginDto)
+        public async Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck =await _userService.GetByMail(userForLoginDto.Email);
             if (userToCheck==null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
@@ -120,9 +121,9 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
-        IDataResult<User> IAuthService.Login(UserForLoginDto userForLoginDto)
+        async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck =await _userService.GetByMail(userForLoginDto.Email);
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);

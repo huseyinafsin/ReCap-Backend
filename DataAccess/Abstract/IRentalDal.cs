@@ -11,7 +11,7 @@ using Entities.DTOs;
 
 namespace DataAccess.Abstract
 {
-    public interface IRentalDal : IEntityRepository<Rental>
+    public interface IRentalDal : IRepository<Rental>
     {
         List<RentalDetailDto> RentalDetails();
         IResult AddRentalWithDetails( RentalAddDto rental);

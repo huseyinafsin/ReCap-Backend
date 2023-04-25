@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Business.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -17,9 +18,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _rentalService.GetAllRentals();
+            var result =await _rentalService.GetAllRentals();
 
             if (result.Success)
             {
@@ -43,9 +44,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid rentalId)
+        public async Task<IActionResult> GetById(Guid rentalId)
         {
-            var result = _rentalService.GetRentalById(rentalId);
+            var result =await _rentalService.GetRentalById(rentalId);
 
             if (result.Success)
             {
@@ -56,9 +57,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Rental rental)
+        public async Task<IActionResult> Add(Rental rental)
         {
-            var result = _rentalService.AddRental(rental);
+            var result =await _rentalService.AddRental(rental);
 
             if (result.Success)
             {
@@ -108,9 +109,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("isrentable")]
-        public IActionResult CheckCanRent(Guid carId, DateTime rentDate, DateTime returnDate)
+        public async Task<IActionResult> CheckCanRent(Guid carId, DateTime rentDate, DateTime returnDate)
         {
-            var result = _rentalService.IsRentable(carId,  rentDate,  returnDate);
+            var result =await _rentalService.IsRentable(carId,  rentDate,  returnDate);
 
             if (result.Success)
             {

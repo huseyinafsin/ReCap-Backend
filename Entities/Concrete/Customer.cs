@@ -10,9 +10,12 @@ namespace Entities.Concrete
 {
     public class Customer: BaseEntity
     {
-
         public Guid UserId { get; set; }
+        public Guid LanguageId { get; set; }
+
         public string CompanyName { get; set; }
         public int FindexScore { get; set; }
+        public virtual Language Language { get; set; }
+
     }
 }

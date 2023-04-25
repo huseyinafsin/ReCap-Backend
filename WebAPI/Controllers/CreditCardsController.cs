@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -18,9 +19,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _creditCardService.GetAllCreditCard();
+            var result =await _creditCardService.GetAllCreditCard();
 
             if (result.Success)
             {
@@ -31,9 +32,9 @@ namespace WebAPI.Controllers
         }
         
         [HttpGet("getcardsbycustomerId")]
-        public IActionResult GetCardsByCustomerId(Guid customerId)
+        public async Task<IActionResult> GetCardsByCustomerId(Guid customerId)
         {
-            var result = _creditCardService.GetCardsByCustomerId(customerId);
+            var result =await _creditCardService.GetCardsByCustomerId(customerId);
 
             if (result.Success)
             {
@@ -44,9 +45,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid creditCardId)
+        public async Task<IActionResult> GetByIdAsync(Guid creditCardId)
         {
-            var result = _creditCardService.GetCreditCardById(creditCardId);
+            var result = await _creditCardService.GetCreditCardByIdAsync(creditCardId);
 
             if (result.Success)
             {

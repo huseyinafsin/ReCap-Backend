@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -18,9 +19,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _paymentService.GetAllPayment();
+            var result =await _paymentService.GetAllPayment();
 
             if (result.Success)
             {
@@ -31,9 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid paymentId)
+        public async Task<IActionResult> GetById(Guid paymentId)
         {
-            var result = _paymentService.GetPaymentById(paymentId);
+            var result =await _paymentService.GetPaymentById(paymentId);
 
             if (result.Success)
             {

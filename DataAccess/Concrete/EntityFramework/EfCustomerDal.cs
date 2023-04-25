@@ -11,8 +11,12 @@ using Entities.DTOs;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCustomerDal : EfEntityRepositoryBase<Customer,ReCapContext>, ICustomerDal
+    public class EfCustomerDal : Repository<Customer>, ICustomerDal
     {
+        public EfCustomerDal()
+        {
+        }
+
         public List<CustomerDetailDto> GetAllWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null)
         {
             using (ReCapContext context = new ReCapContext())

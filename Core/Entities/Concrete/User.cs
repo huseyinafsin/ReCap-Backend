@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Core.Entities;
+using System;
+
 
 namespace Core.Entities.Concrete
 {
-    public class User: BaseEntity
+    public class User : BaseEntity
     {
+        public Guid LanguageId { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -13,5 +15,8 @@ namespace Core.Entities.Concrete
         public byte[] PasswordHash { get; set; }
         public bool Status { get; set; }
 
+
     }
+
+
 }

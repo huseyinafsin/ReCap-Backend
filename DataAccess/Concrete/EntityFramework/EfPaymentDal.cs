@@ -4,6 +4,9 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework;
 
-public class EfPaymentDal :EfEntityRepositoryBase<Payment, ReCapContext>, IPaymentDal
+public class EfPaymentDal : Repository<Payment>, IPaymentDal
 {
+    public EfPaymentDal()
+    {
+    }
 }

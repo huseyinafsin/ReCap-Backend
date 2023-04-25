@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Entities.Concrete;
 using System;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -17,9 +18,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public  IActionResult GetAll()
         {
-            var result = _brandService.GetAllBrands();
+            var result = _brandService.GetAllBrands().Result;
 
             if (result.Success)
             {
@@ -30,9 +31,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid brandId)
+        public async Task<IActionResult> GetById(Guid brandId)
         {
-            var result = _brandService.GetBrandById(brandId);
+            var result =await _brandService.GetBrandById(brandId);
 
             if (result.Success)
             {

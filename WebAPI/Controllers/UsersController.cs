@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.Abstract;
-using Core.Entities.Concrete;
 using Entities.Concrete;
 using System;
+using Core.Entities.Concrete;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -17,9 +18,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult>  GetAll()
         {
-            var result = _userService.GetAllUsers();
+            var result =await _userService.GetAllUsers();
 
             if (result.Success)
             {
@@ -30,9 +31,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(Guid userId)
+        public async Task<IActionResult> GetById(Guid userId)
         {
-            var result = _userService.GetUserById(userId);
+            var result =await _userService.GetUserById(userId);
 
             if (result.Success)
             {

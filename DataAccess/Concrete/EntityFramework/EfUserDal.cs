@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
+using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public  class EfUserDal :EfEntityRepositoryBase<User,ReCapContext>, IUserDal
+    public  class EfUserDal :Repository<User>, IUserDal
     {
+
+
         public List<OperationClaim> GetClaims(User user)
         {
             using (var context = new ReCapContext ())

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -7,29 +8,31 @@ using Entities.Concrete;
 
 namespace Business.Concrete;
 
-public class PaymentManager : IPaymentService
+public class PaymentManager : Service<Payment>, IPaymentService
 {
     private IPaymentDal _paymentDal;
 
-    public PaymentManager(IPaymentDal paymentDal)
+    public PaymentManager(IPaymentDal paymentDal) :base(paymentDal)
     {
         _paymentDal = paymentDal;
     }
 
-    public IDataResult<List<Payment>> GetAllPayment()
+    public async Task<IDataResult<List<Payment>>> GetAllPayment()
     {
-        return new SuccessDataResult<List<Payment>>(_paymentDal.GetAll(), " Payments listed successful");
+        var result = await _paymentDal.GetAll();
+        return new SuccessDataResult<List<Payment>>(result, " Payments listed successful");
     }
 
     public IResult AddPayment(Payment payment)
     {
-        _paymentDal.Add(payment);
+        _paymentDal.AddAsync(payment);
         return new SuccessResult("Payment added successful");
     }
 
+
     public IResult DeletePayment(Payment payment)
     {
-        _paymentDal.Delete(payment);
+        _paymentDal.Remove(payment);
         return new SuccessResult("Payment deleted successful");
     }
 
@@ -39,8 +42,9 @@ public class PaymentManager : IPaymentService
         return new SuccessResult("Payment updated successful");
     }
 
-    public IDataResult<Payment> GetPaymentById(Guid paymentId)
+    public async Task<IDataResult<Payment>> GetPaymentById(Guid paymentId)
     {
-        return new SuccessDataResult<Payment>(_paymentDal.Get(p => p.Id == paymentId), "Payment fetched successful");
+        var result = await _paymentDal.GetAsync(p => p.Id == paymentId);
+        return new SuccessDataResult<Payment>(result, "Payment fetched successful");
     }
 }

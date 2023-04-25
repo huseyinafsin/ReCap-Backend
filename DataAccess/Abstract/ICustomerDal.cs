@@ -10,7 +10,7 @@ using Entities.DTOs;
 
 namespace DataAccess.Abstract
 {
-    public interface ICustomerDal: IEntityRepository<Customer>
+    public interface ICustomerDal: IRepository<Customer>
     {
         List<CustomerDetailDto> GetAllWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null);
         CustomerDetailDto GetWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null);

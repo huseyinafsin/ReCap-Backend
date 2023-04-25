@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Core.Services;
 using Core.Utilities.Results;
 using Entities.Concrete;
 
 namespace Business.Abstract;
 
-public interface IPaymentService
+public interface IPaymentService : IService<Payment>
 {
-    IDataResult<List<Payment>> GetAllPayment();
+    Task<IDataResult<List<Payment>>> GetAllPayment();
     IResult AddPayment(Payment payment);
     IResult DeletePayment(Payment payment);
     IResult UpdatePayment(Payment payment);
-    IDataResult<Payment> GetPaymentById(Guid paymentId);
+    Task<IDataResult<Payment>> GetPaymentById(Guid paymentId);
 }

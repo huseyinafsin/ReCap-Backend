@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Core;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.DataAccess;
+using Core.DataAccess.EntityFramework;
+using Core.Entities;
+using Core.Services;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -52,6 +57,10 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<MailSubscribeManager>().As<IMailSubscribeService>().SingleInstance();
             builder.RegisterType<EfMailSubscribeDal>().As<IMailSubscriberDal>();
+
+            builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>)).InstancePerDependency();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency();
+
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

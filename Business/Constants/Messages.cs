@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Business.Constants
 {
+    
     public static class Messages
     {
+        public static string EntityAdded = "Added";
+        public static string EntityUpdated = "updated";
+        public static string EntityListed = "listed";
+        public static string EntityFetched = "fetched";
+        public static string EntityDeleted = "deleted";
+
+
         public static string CarAdded = "Araba eklendi";
         public static string BrandAdded = "Marka eklendi";
         public static string ColorAdded = " Renk eklendi";  
@@ -72,5 +80,6 @@ namespace Business.Constants
         public static string NotAddedCustomer = "Customer Not Added";
         public static string UserNotAdded = "An error durring register custemer";
         public static string CreditCardSaved = "Credit Card Saved";
+
     }
 }

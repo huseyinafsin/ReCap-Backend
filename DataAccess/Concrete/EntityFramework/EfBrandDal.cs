@@ -11,8 +11,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBrandDal : EfEntityRepositoryBase<Brand,ReCapContext>, IBrandDal
+    public class EfBrandDal : Repository<Brand>, IBrandDal
     {
-       
+        
+        public EfBrandDal()
+        {
+        }
     }
 }

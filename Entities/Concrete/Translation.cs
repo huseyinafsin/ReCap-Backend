@@ -15,5 +15,9 @@ namespace Entities.Concrete
         public string Title { get; set; }
         public string Text { get; set; }
 
+        public virtual Page Page { get; set; }
+        public virtual Language Language { get; set; }
+
+
     }
 }
