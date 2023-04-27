@@ -22,7 +22,7 @@ You can find the project's frontend with: [ReCapProject Frontend](https://github
 ## Layers
 N-tier architecture model provides creating flexible and reusable applications. Therefore, Layered Architecture Design Pattern used in this project.
 
-### [Entities Layer](https://github.com/seymadonmez/ReCapProject/tree/master/Entities)
+### [Entities Layer](https://github.com/huseyinafsin/ReCap-Angular)
 ![Entites](https://user-images.githubusercontent.com/77541232/115163081-c7fe8800-a0af-11eb-858b-09489bb74145.JPG)
 <br/>
 
