@@ -13,7 +13,7 @@ namespace DataAccess.Abstract
 {
     public interface IRentalDal : IRepository<Rental>
     {
-        List<RentalDetailDto> RentalDetails();
+        IQueryable<RentalDetailDto> RentalDetails();
         IResult AddRentalWithDetails( RentalAddDto rental);
     }
 }

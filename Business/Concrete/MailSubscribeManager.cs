@@ -27,7 +27,7 @@ namespace Business.Concrete
 
         public IResult AddMail(MailSubscribe mailSubscribe)
         {
-            _mailSubscriberDal.AddAsync(mailSubscribe);
+            _mailSubscriberDal.Add(mailSubscribe);
             return new SuccessResult("Mail added");
         }
 
@@ -45,7 +45,7 @@ namespace Business.Concrete
 
         public async Task<IDataResult<MailSubscribe>> GetMailByIdAsync(Guid mailId)
         {
-            return new SuccessDataResult<MailSubscribe>(await _mailSubscriberDal.GetAsync(m=>m.Id==mailId));
+            return new SuccessDataResult<MailSubscribe>( _mailSubscriberDal.Get(m=>m.Id==mailId));
         }
     }
 }

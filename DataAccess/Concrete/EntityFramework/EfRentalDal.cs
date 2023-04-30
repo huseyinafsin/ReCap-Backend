@@ -8,6 +8,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -16,13 +17,13 @@ namespace DataAccess.Concrete.EntityFramework
         private readonly EfCreditCardDal efCreditCardDal;
 
 
-        public EfRentalDal(EfCreditCardDal efCreditCardDal) 
+        public EfRentalDal(EfCreditCardDal efCreditCardDal, DbContext context) :base(context)
         {
             this.efCreditCardDal = efCreditCardDal;
 
         }
 
-        List<RentalDetailDto> IRentalDal.RentalDetails()
+        IQueryable<RentalDetailDto> IRentalDal.RentalDetails()
         {
             using (ReCapContext context = new ReCapContext())
             {
@@ -51,13 +52,13 @@ namespace DataAccess.Concrete.EntityFramework
                                  CustomerId = cu.Id,
                                  CustomerFullName = $"{u.FirstName} {u.LastName}",
                                  ReturnDate = r.ReturnDate,
-                                 DailyPrice = ca.DaiyPrice,
+                                 //DailyPrice = ca.DaiyPrice,
                                  RentDate = r.RentDate,
                                  PaymentId = r.PaymentId,
                                  PaymentDate = p.PaymentDate,
                                  DeliveryStatus = r.DeliveryStatus
                              };
-                return result.ToList();
+                return result.AsQueryable().AsNoTracking();
             }
         }
 

@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult>  GetAll()
         {
-            var result =await _userService.GetAllUsers();
+            var result = _userService.GetAllUsers();
 
             if (result.Success)
             {
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetById(Guid userId)
         {
-            var result =await _userService.GetUserById(userId);
+            var result = _userService.GetUserById(userId);
 
             if (result.Success)
             {

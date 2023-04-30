@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Core.Utilities.Results;
@@ -17,15 +18,15 @@ public class PaymentManager : Service<Payment>, IPaymentService
         _paymentDal = paymentDal;
     }
 
-    public async Task<IDataResult<List<Payment>>> GetAllPayment()
+    public async Task<IDataResult<IQueryable<Payment>>> GetAllPayment()
     {
-        var result = await _paymentDal.GetAll();
-        return new SuccessDataResult<List<Payment>>(result, " Payments listed successful");
+        var result =  _paymentDal.GetAll();
+        return new SuccessDataResult<IQueryable<Payment>>(result, " Payments listed successful");
     }
 
     public IResult AddPayment(Payment payment)
     {
-        _paymentDal.AddAsync(payment);
+        _paymentDal.Add(payment);
         return new SuccessResult("Payment added successful");
     }
 
@@ -44,7 +45,7 @@ public class PaymentManager : Service<Payment>, IPaymentService
 
     public async Task<IDataResult<Payment>> GetPaymentById(Guid paymentId)
     {
-        var result = await _paymentDal.GetAsync(p => p.Id == paymentId);
+        var result =  _paymentDal.Get(p => p.Id == paymentId);
         return new SuccessDataResult<Payment>(result, "Payment fetched successful");
     }
 }

@@ -15,11 +15,17 @@ namespace Entities.Concrete
         public string CarName { get; set; }
         public Guid BrandId { get; set; }
         public Guid ColorId { get; set; }
-        public int ModelYear { get; set; }
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal DaiyPrice { get; set; }
+        public Guid GearTypeId { get; set; }
+        public Guid FuelTypeId { get; set; }
+        public Guid CarTypeId { get; set; }
         public string  Model { get; set; }
         public string Description { get; set; }
         public int MinFindexScore { get; set; }
+
+        public virtual Brand Brand { get; set; }
+        public virtual Color Color { get; set; }
+        public virtual FuelType FuelType { get; set; }
+        public virtual GearType GearType { get; set; }
+        public virtual CarType CarType { get; set; }
     }
 }

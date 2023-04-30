@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities.Concrete;
+using Core.DataAccess;
 
 namespace DataAccess.Concrete
 {
@@ -14,6 +15,16 @@ namespace DataAccess.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=LPTNET2116\SQLEXPRESS;Database=ReCap;Trusted_Connection=True;");
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+           return SaveChangesAsync();
+        }
+
+        public int SaveChanges()
+        {
+            return SaveChanges();
         }
 
         public virtual DbSet<Car> Cars { get; set; }

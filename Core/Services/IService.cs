@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace Core.Services
 {
     public interface IService<TEntity> where TEntity : class , IEntity { 
-        Task<IDataResult<TEntity>> GetByIdAsync(Guid id);
+        IDataResult<TEntity> GetByIdAsync(Guid id);
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
-        Task<IDataResult<IEnumerable<TEntity>>> GetAllAsync();
-        Task<IResult> AnyAsync(Expression<Func<TEntity, bool>> expression);
-        Task<IDataResult<TEntity>> AddAsync(TEntity entity);
-        Task<IDataResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities);
+        IDataResult<IEnumerable<TEntity>> GetAllAsync();
+        IResult Any(Expression<Func<TEntity, bool>> expression);
+        IDataResult<TEntity> Add(TEntity entity);
+        IDataResult<IEnumerable<TEntity>> AddRange(IEnumerable<TEntity> entities);
         IDataResult<TEntity> Update(TEntity entity);
-        Task<IResult> RemoveAsync(Guid id);
-        Task<IResult> RemoveRangeAsync(IEnumerable<TEntity> entities);
+        IResult Remove(Guid id);
+        IResult RemoveRange(IEnumerable<TEntity> entities);
     }
 }

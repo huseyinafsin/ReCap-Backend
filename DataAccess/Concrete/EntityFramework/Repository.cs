@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,65 +9,69 @@ using System.Threading.Tasks;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class Repository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity> :  IRepository<TEntity>
         where TEntity : class, IEntity, new()
 
     {
-        private readonly DbSet<TEntity> _dbSet;
-        protected readonly ReCapContext _context;
-        public Repository()
+        protected readonly DbSet<TEntity> _dbSet;
+        protected readonly DbContext _context;
+        public Repository(DbContext context)
         {
-            _context = new ReCapContext();
+            _context = context;
             _dbSet = _context.Set<TEntity>();
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public TEntity Add(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
+             _dbSet.AddAsync(entity);
+            try
+            {
+               _context.SaveChanges();
+            }
+            catch(Exception ex) { }
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
+        public  IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities)
         {
-            await _dbSet.AddRangeAsync(entities);
-            await _context.SaveChangesAsync();
+             _dbSet.AddRange(entities);
+             _context.SaveChanges();
             return entities;
 
         }
 
 
-        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
+        public bool Any(Expression<Func<TEntity, bool>> expression)
         {
-            return await _dbSet.AnyAsync(expression);
+            return  _dbSet.AnyAsync(expression).Result;
         }
 
-        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> expression = null)
+        public  IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> expression = null)
         {
             if (expression != null)
             {
-                return await _dbSet.Where(expression).ToListAsync();
+                return  _dbSet.Where(expression).AsQueryable().AsNoTracking();
             }
-            return await _dbSet.ToListAsync();
+            return  _dbSet.AsQueryable().AsNoTracking();
 
         }
 
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
+        public  TEntity Get(Expression<Func<TEntity, bool>> expression)
         {
-            return await _dbSet.FirstOrDefaultAsync(expression);
+            return  _dbSet.FirstOrDefault(expression);
         }
 
-        public async Task Remove(TEntity entity)
+        public void Remove(TEntity entity)
         {
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
 
         }
 
-        public async Task RemoveRange(IEnumerable<TEntity> entities)
+        public  void RemoveRange(IEnumerable<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
 
         }
 

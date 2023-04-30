@@ -10,5 +10,14 @@ namespace Core.Entities
     {
         
         public Guid Id { get; set; }
+        public Guid InsertedUserId { get; set; }
+        public Guid? UpdatedUserId { get; set; }
+
+        public DateTime InsertedAt { get; set; } =DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public bool Deleted { get; set; } = false;
+
+
+
     }
 }

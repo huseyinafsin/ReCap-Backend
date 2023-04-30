@@ -11,9 +11,10 @@ using System.Linq.Expressions;
 namespace DataAccess.Abstract
 {
     public interface ICarDal : IRepository<Car>
-    {  
+    {
         //List<CarDetailDto> CarDetails(CarDetailFilter filter);
-        List<CarDetailDto> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
+        IQueryable<CarDetailDto> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
         CarDetailDto CarDetailsById(Guid carId);
+        IEnumerable<CarGridDto> GetPaged( int page,  int pageSize);
     }
 }

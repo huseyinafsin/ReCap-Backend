@@ -11,6 +11,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using Http=Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -23,16 +24,16 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        public async Task<IDataResult<List<CarImage>>> GetAllCarImages()
+        public IDataResult<IEnumerable<CarImage>> GetAllCarImages()
         {
-            var result = await _carImageDal.GetAll();
+            var result =  _carImageDal.GetAll();
 
-            return new SuccessDataResult<List<CarImage>>(result, Messages.CarImageListed);
+            return new SuccessDataResult<IEnumerable<CarImage>>(result, Messages.CarImageListed);
         }
 
         [SecuredOperation("carimage.add,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
-        public async Task<IResult> AddCarImage(CarImage carImage, Http.IFormFile file)
+        public IResult AddCarImage(CarImage carImage, Http.IFormFile file)
         {
             var result = BusinessRules.Run((Task<IResult>)CheckImageRestrictionAsync(carImage.CarId));
 
@@ -51,7 +52,7 @@ namespace Business.Concrete
             carImage.ImagePath = path;
 
             carImage.Date =DateTime.Now;
-            _carImageDal.AddAsync(carImage);
+            _carImageDal.Add(carImage);
 
             return new SuccessResult();
 
@@ -77,10 +78,10 @@ namespace Business.Concrete
 
         [SecuredOperation("carimage.update,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
-        public async Task<IResult> UpdateCarImage(CarImage carImage, Http.IFormFile file)
+        public  IResult UpdateCarImage(CarImage carImage, Http.IFormFile file)
         {
           
-            var filePath= await _carImageDal.GetAsync(i => i.Id == carImage.Id);
+            var filePath=  _carImageDal.Get(i => i.Id == carImage.Id);
 
             var updateResult = FileHelperManager.Update(file, filePath.ImagePath ,Paths.CarImages);
 
@@ -100,20 +101,21 @@ namespace Business.Concrete
 
         //[SecuredOperation("carimage.getcarimagebyid,customer,admin")]
         [CacheAspect]
-        public async Task<IDataResult<CarImage>> GetCarImageById(Guid carImageId)
+        public  IDataResult<CarImage> GetCarImageById(Guid carImageId)
         {
-            var result = await _carImageDal.GetAsync(i => i.Id == carImageId);
+            var result =  _carImageDal.Get(i => i.Id == carImageId);
            return new SuccessDataResult<CarImage>();
         }
 
         //[SecuredOperation("carimage.getallcarimagesbycarid,customer,admin")]
         [CacheAspect]
-        public async Task<IDataResult<List<CarImage>>> GetAllCarImagesByCarId(Guid carId)
+        public IDataResult<IEnumerable<CarImage>> GetAllCarImagesByCarId(Guid carId)
         {
-            var result = new SuccessDataResult<List<CarImage>>(await _carImageDal.GetAll(x => x.CarId == carId));
-            if (result.Data.Count==0)
+            var result = new SuccessDataResult<IEnumerable<CarImage>>( _carImageDal.GetAll(x => x.CarId == carId));
+            if (result.Data.Count()==0)
             {
-               result.Data.Add(await _carImageDal.GetAsync(x=>x.Id ==Guid.Empty));
+                var defaultImg = _carImageDal.Get(x => x.Id == Guid.Empty);
+               result.Data.Append(defaultImg);
 
                return result;
             }
@@ -125,7 +127,7 @@ namespace Business.Concrete
         // ------ Business Rules ca
         private  IResult CheckImageRestrictionAsync(Guid carID)
         {
-            var result =  _carImageDal.GetAll(c => c.CarId == carID).Result.Count;
+            var result =  _carImageDal.GetAll(c => c.CarId == carID).Count();
 
             if (result >= 5)
             {
@@ -135,6 +137,10 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        IDataResult<List<CarImage>> ICarImageService.GetAllCarImages()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

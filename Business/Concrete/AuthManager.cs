@@ -7,6 +7,7 @@ using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using Entities.Concrete;
 using Entities.DTOs;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
@@ -61,7 +62,7 @@ namespace Business.Concrete
                 UserId = user.Id
             };
 
-            var result =await _customerService.AddCustomer(customer);
+            var result = _customerService.AddCustomer(customer);
 
             if (result.Success)
             {
@@ -74,7 +75,7 @@ namespace Business.Concrete
 
         public async Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
         {
-            var userToCheck =await _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
             if (userToCheck==null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
@@ -100,7 +101,7 @@ namespace Business.Concrete
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var claims = _userService.GetClaims(user);
-            var accessToken = _tokenHelper.CreateToken(user, claims.Data);
+            var accessToken = _tokenHelper.CreateToken(user, claims.Data.ToList());
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
 
@@ -123,7 +124,7 @@ namespace Business.Concrete
 
         async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck =await _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
@@ -149,7 +150,7 @@ namespace Business.Concrete
         IDataResult<AccessToken> IAuthService.CreateAccessToken(User user)
         {
             var claims = _userService.GetClaims(user);
-            var accessToken = _tokenHelper.CreateToken(user, claims.Data);
+            var accessToken = _tokenHelper.CreateToken(user, claims.Data.ToList());
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
     }

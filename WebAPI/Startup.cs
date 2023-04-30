@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
+using Business.Mapping;
 
 namespace WebAPI
 {
@@ -40,7 +41,11 @@ namespace WebAPI
                 options.MemoryBufferThreshold = int.MaxValue;
             });
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-
+            //Automapper
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile(new CarProfile());
+            });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

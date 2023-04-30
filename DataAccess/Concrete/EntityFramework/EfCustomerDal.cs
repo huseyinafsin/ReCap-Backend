@@ -8,16 +8,17 @@ using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCustomerDal : Repository<Customer>, ICustomerDal
     {
-        public EfCustomerDal()
+        public EfCustomerDal(DbContext context) : base(context)
         {
         }
 
-        public List<CustomerDetailDto> GetAllWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null)
+        public IQueryable<CustomerDetailDto> GetAllWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null)
         {
             using (ReCapContext context = new ReCapContext())
             {
@@ -33,7 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
                         CompanyName = c.CompanyName,
                         FindexScore = c.FindexScore
                     };
-                return filter == null ? result.ToList() : result.Where(filter).ToList();
+                return filter == null ? result.AsQueryable().AsNoTracking() : result.Where(filter).AsQueryable().AsNoTracking();
             }
         }
 

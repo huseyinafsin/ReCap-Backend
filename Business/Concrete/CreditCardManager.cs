@@ -21,15 +21,15 @@ namespace Business.Concrete
             _creditCardDal = creditCardDal;
         }
 
-        public async Task<IDataResult<List<CreditCard>>> GetAllCreditCard()
+        public IDataResult<IQueryable<CreditCard>> GetAllCreditCard()
         {
-            var result = await _creditCardDal.GetAll();
-            return new SuccessDataResult<List<CreditCard>>(result,"Credit Cards Listed");
+            var result =  _creditCardDal.GetAll();
+            return new SuccessDataResult<IQueryable<CreditCard>>(result,"Credit Cards Listed");
         }
 
         public IResult AddCreditCard(CreditCard creditCard)
         {
-            _creditCardDal.AddAsync(creditCard);
+            _creditCardDal.Add(creditCard);
             return new  SuccessResult("Credit card added successful");
         }
 
@@ -45,9 +45,9 @@ namespace Business.Concrete
             return new SuccessResult("Credit card updated successful");
         }
 
-        public async Task<IDataResult<CreditCard>> GetCreditCardByIdAsync(Guid creditCardId)
-        {
-            var result = await _creditCardDal.GetAsync(c => c.Id == creditCardId);
+        public IDataResult<CreditCard> GetCreditCardByIdAsync(Guid creditCardId) { 
+        
+            var result =  _creditCardDal.Get(c => c.Id == creditCardId);
             return new SuccessDataResult<CreditCard>(result, "Credit card fetched successful");
         }
 
@@ -56,15 +56,17 @@ namespace Business.Concrete
             return new SuccessDataResult<bool>(_creditCardDal.CheckCreditCard(creditCard), "Credit card fetched successful");
         }
 
-        public async Task<IDataResult<List<CreditCard>>> GetCardsByCustomerId(Guid customerId)
+        public IDataResult<IQueryable<CreditCard>> GetCardsByCustomerId(Guid customerId)
         {
-            var result = await _creditCardDal.GetAll(c => c.CustomerId == customerId);
-            return new SuccessDataResult<List<CreditCard>>(result, "Credit Cards Listed");
+            var result =  _creditCardDal.GetAll(c => c.CustomerId == customerId);
+            return new SuccessDataResult<IQueryable<CreditCard>>(result, "Credit Cards Listed");
         }
 
         public IDataResult<bool> SaveCreditCard(Guid customerId, string cardNumber)
         {
             return new SuccessDataResult<bool>(_creditCardDal.SaveCreditCard(customerId, cardNumber), Messages.CreditCardSaved);
         }
+
+
     }
 }

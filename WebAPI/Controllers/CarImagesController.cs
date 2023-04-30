@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            var result =await _carImageService.GetAllCarImages();
+            var result = _carImageService.GetAllCarImages();
 
             if (result.Success)
             {
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
         [HttpGet("getallcarimagesbyid")]
         public async Task<IActionResult> GetAllCarImagesByCarId(Guid carId)
         {
-            var result =await _carImageService.GetAllCarImagesByCarId(carId);
+            var result = _carImageService.GetAllCarImagesByCarId(carId);
 
             if (result.Success)
             {
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetById(Guid imageId)
         {
-            var result =await _carImageService.GetCarImageById(imageId);
+            var result = _carImageService.GetCarImageById(imageId);
 
             if (result.Success)
             {             
@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> Upload(  [FromForm] CarImage carImage, [FromForm] IFormFile file)
         {
-            var result =await _carImageService.AddCarImage(carImage, file);
+            var result = _carImageService.AddCarImage(carImage, file);
 
             if (result.Success)
             {
@@ -98,7 +98,7 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> UpdateAsync(CarImage carImage,[FromForm] IFormFile file)
         {
-            var result =await _carImageService.UpdateCarImage(carImage,file);
+            var result = _carImageService.UpdateCarImage(carImage,file);
 
             if (result.Success)
             {

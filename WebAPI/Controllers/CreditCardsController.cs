@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            var result =await _creditCardService.GetAllCreditCard();
+            var result = _creditCardService.GetAllCreditCard();
 
             if (result.Success)
             {
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         [HttpGet("getcardsbycustomerId")]
         public async Task<IActionResult> GetCardsByCustomerId(Guid customerId)
         {
-            var result =await _creditCardService.GetCardsByCustomerId(customerId);
+            var result = _creditCardService.GetCardsByCustomerId(customerId);
 
             if (result.Success)
             {
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetByIdAsync(Guid creditCardId)
         {
-            var result = await _creditCardService.GetCreditCardByIdAsync(creditCardId);
+            var result =  _creditCardService.GetCreditCardByIdAsync(creditCardId);
 
             if (result.Success)
             {

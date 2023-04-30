@@ -4,15 +4,16 @@ using Core.Entities;
 using Core.Utilities.Results;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Business.Abstract
 {
     public interface IBrandService
     {
-       Task<IDataResult<List<Brand>>> GetAllBrands();
+       IDataResult<IQueryable<Brand>> GetAllBrands();
        IResult AddBrand(Brand brand);
        IResult DeleteBrand(Brand brand);
        IResult UpdateBrand(Brand brand);
-       Task<IDataResult<Brand>> GetBrandById(Guid brandId);
+       IDataResult<Brand> GetBrandById(Guid brandId);
     }
 }

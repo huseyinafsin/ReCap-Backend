@@ -31,7 +31,7 @@ namespace Business.Concrete
         public IResult AddBrand(Brand brand)
         {
 
-            _brandDal.AddAsync(brand);
+            _brandDal.Add(brand);
             return new SuccessResult(Messages.BrandAdded);
 
         }
@@ -49,19 +49,19 @@ namespace Business.Concrete
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public async Task<IDataResult<List<Brand>>> GetAllBrands()
+        public IDataResult<IQueryable<Brand>> GetAllBrands()
         {
-            var result =await _brandDal.GetAll();
+            var result = _brandDal.GetAll();
 
 
-            return new SuccessDataResult<List<Brand>>(result,Messages.BrandListed) ;
+            return new SuccessDataResult<IQueryable<Brand>>(result,Messages.BrandListed) ;
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public async Task<IDataResult<Brand>> GetBrandById(Guid brandId)
+        public  IDataResult<Brand> GetBrandById(Guid brandId)
         {
-           return new SuccessDataResult<Brand>(await _brandDal.GetAsync(b => b.Id == brandId),Messages.BrandFetched);
+           return new SuccessDataResult<Brand>( _brandDal.Get(b => b.Id == brandId),Messages.BrandFetched);
         }
 
         [ValidationAspect(typeof(BrandValidator))]

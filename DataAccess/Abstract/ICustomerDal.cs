@@ -12,7 +12,7 @@ namespace DataAccess.Abstract
 {
     public interface ICustomerDal: IRepository<Customer>
     {
-        List<CustomerDetailDto> GetAllWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null);
+        IQueryable<CustomerDetailDto> GetAllWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null);
         CustomerDetailDto GetWithDetails(Expression<Func<CustomerDetailDto, bool>> filter = null);
     }
 }

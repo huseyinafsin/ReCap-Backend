@@ -49,32 +49,32 @@ namespace Business.Concrete
 
         [CacheAspect]
         [SecuredOperation("admin,customer")]
-        public async Task<IDataResult<List<User>>> GetAllUsers()
+        public IDataResult<IQueryable<User>> GetAllUsers()
         {
-            return new SuccessDataResult<List<User>>(await _userDal.GetAll(), Messages.UserListed);
+            return new SuccessDataResult<IQueryable<User>>( _userDal.GetAll(), Messages.UserListed);
         }
 
 
         //[CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public async Task<User> GetByMail(string email)
+        public User GetByMail(string email)
         {
-            return await _userDal.GetAsync(u => u.Email == email);
+            return  _userDal.Get(u => u.Email == email);
         }
 
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        public IDataResult<IQueryable<OperationClaim>> GetClaims(User user)
         {
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+            return new SuccessDataResult<IQueryable<OperationClaim>>(_userDal.GetClaims(user));
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public async Task<IDataResult<User>> GetUserById(Guid userId)
+        public IDataResult<User> GetUserById(Guid userId)
         {
-            return new SuccessDataResult<User>(await _userDal.GetAsync(x => x.Id == userId), Messages.UserFetched);
+            return new SuccessDataResult<User>( _userDal.Get(x => x.Id == userId), Messages.UserFetched);
         }
 
 

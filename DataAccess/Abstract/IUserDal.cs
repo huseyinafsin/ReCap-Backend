@@ -11,7 +11,7 @@ namespace DataAccess.Abstract
 {
     public  interface IUserDal :IRepository<User>
     {
-        List<OperationClaim> GetClaims(User user);
+        IQueryable<OperationClaim> GetClaims(User user);
 
     }
 }

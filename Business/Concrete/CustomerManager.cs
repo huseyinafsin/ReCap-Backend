@@ -33,16 +33,16 @@ namespace Business.Concrete
 
         [CacheAspect()]
         [SecuredOperation("admin")]
-        public IDataResult<List<CustomerDetailDto>> GetAllWithDetails()
+        public IDataResult<IQueryable<CustomerDetailDto>> GetAllWithDetails()
         {
-            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetAllWithDetails(), Messages.CustomerListed);
+            return new SuccessDataResult<IQueryable<CustomerDetailDto>>(_customerDal.GetAllWithDetails(), Messages.CustomerListed);
 
         }
 
         [CacheRemoveAspect("ICustomerService.Get")]
         //[SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(CustomerDtoValidator))]
-        public async Task<IResult> AddCustomer(Customer customer)
+        public IResult AddCustomer(Customer customer)
         {
             var rulesResult = BusinessRules.Run((Task<IResult>)CheckIfUserIdValidAsync(customer.UserId), CheckIfUserIdExist(customer.UserId));
             if (rulesResult != null)
@@ -50,8 +50,8 @@ namespace Business.Concrete
                 return new ErrorResult( rulesResult.Message);
             }
 
-            _customerDal.AddAsync(customer);
-            var result =await _customerDal.GetAsync(c => c.UserId == customer.UserId && c.CompanyName == customer.CompanyName);
+            _customerDal.Add(customer);
+            var result = _customerDal.Get(c => c.UserId == customer.UserId && c.CompanyName == customer.CompanyName);
             if (result != null)
             {
                 return new SuccessDataResult<Customer>(result, Messages.CustomerAdded);
@@ -64,7 +64,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICustomerService.Get")]
         [SecuredOperation("admin,customer")]
         //[ValidationAspect(typeof(CustomerValidator))]
-        public async Task<IResult> DeleteCustomer(Customer customer)
+        public IResult DeleteCustomer(Customer customer)
         {
 
             var rulesResult = BusinessRules.Run((Task<IResult>)CheckIfCustomerIdExist(customer.Id));
@@ -73,7 +73,7 @@ namespace Business.Concrete
                 return rulesResult;
             }
 
-            var deletedCustomer =await _customerDal.GetAsync(c => c.Id == customer.Id);
+            var deletedCustomer = _customerDal.Get(c => c.Id == customer.Id);
             _customerDal.Remove(deletedCustomer);
             return new SuccessResult(Messages.CustomerDeleted);
         }
@@ -81,18 +81,18 @@ namespace Business.Concrete
 
         [CacheAspect(10)]
         [SecuredOperation("admin")]
-        public async Task<IDataResult<List<Customer>>> GetAllCustomers()
+        public IDataResult<IQueryable<Customer>> GetAllCustomers()
         {
-            var result = await _customerDal.GetAll();
+            var result =  _customerDal.GetAll();
 
-            return new SuccessDataResult<List<Customer>>(result,Messages.CustomerListed);
+            return new SuccessDataResult<IQueryable<Customer>>(result,Messages.CustomerListed);
         }
 
         [CacheAspect()]
         [SecuredOperation("admin,customer")]
-        public async Task<IDataResult<Customer>> GetCustomerById(Guid customerId)
+        public IDataResult<Customer> GetCustomerById(Guid customerId)
         {
-            var result =await _customerDal.GetAsync(c => c.Id == customerId);
+            var result = _customerDal.Get(c => c.Id == customerId);
             if (result != null)
             {
                 return new SuccessDataResult<Customer>(result, Messages.CustomerListed);
@@ -146,7 +146,7 @@ namespace Business.Concrete
 
         private IResult CheckIfCustomerIdExist(Guid customerId)
         {
-            var result = _customerDal.GetAll(c => c.Id == customerId).Result.Any();
+            var result = _customerDal.GetAll(c => c.Id == customerId).Any();
             if (!result)
             {
                 return new ErrorResult(Messages.CustomerNotExist);
@@ -156,7 +156,7 @@ namespace Business.Concrete
 
         private IResult CheckIfUserIdExist(Guid userId)
         {
-            var result = _customerDal.GetAll(c => c.UserId == userId).Result.Any();
+            var result = _customerDal.GetAll(c => c.UserId == userId).Any();
             if (result)
             {
                 return new ErrorResult(Messages.UserAlreadyCustomer);
@@ -164,9 +164,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private async Task<IResult> CheckIfUserIdValidAsync(Guid userId)
+        private IResult CheckIfUserIdValidAsync(Guid userId)
         {
-            var result =await _userService.GetUserById(userId);
+            var result = _userService.GetUserById(userId);
             if (!result.Success)
             {
                 return new ErrorResult(Messages.UserNotExist);
@@ -190,5 +190,7 @@ namespace Business.Concrete
         {
             return _customerDal.GetWithDetails(c=>c.CustomerId==customerId).FindexScore;
         }
+
+
     }
 }

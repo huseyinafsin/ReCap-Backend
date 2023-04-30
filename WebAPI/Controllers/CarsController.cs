@@ -19,10 +19,10 @@ namespace WebAPI.Controllers
             _carService = carService;   
         }
 
-        [HttpGet("getall")]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()
         {
-            var result =await _carService.GetAllCars();
+            var result = _carService.GetAllCars();
 
             if (result.Success)
             {
@@ -33,10 +33,10 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getbybrand")]
-        public IActionResult GetAllByBrandId(Guid brandId)
+        [HttpGet("[action]")]
+        public IActionResult GetPaged(int page, int pageSize)
         {
-            var result = _carService.GetCarsByBrandId(brandId);
+            var result =  _carService.GetPaged( page, pageSize);
 
             if (result.Success)
             {
@@ -46,10 +46,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbycolor")]
-        public IActionResult GetAllByColorId(Guid colorId)
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetAllByBrandId(Guid id)
         {
-            var result = _carService.GetCarsByColorId(colorId);
+            var result = _carService.GetCarsByBrandId(id);
 
             if (result.Success)
             {
@@ -59,7 +60,20 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("cardetails")]
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetAllByColorId(Guid id)
+        {
+            var result = _carService.GetCarsByColorId(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("[action]")]
         public IActionResult Details()
         {
             var result = _carService.CarDetails();
@@ -72,7 +86,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }  
         
-        [HttpGet("gettopcheapcars")]
+        [HttpGet("[action]/{top}")]
         public IActionResult GetTopCheapCars(int top)
         {
             var result = _carService.CarTopCarsDetails(top);
@@ -85,10 +99,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("cardetailsbyid")]
-        public IActionResult CarDetailsById(Guid carId)
+        [HttpGet("details/{id}")]
+        public IActionResult CarDetailsById(Guid id)
         {
-            var result = _carService.CarDetailsById(carId);
+            var result = _carService.CarDetailsById(id);
 
             if (result.Success)
             {
@@ -99,10 +113,10 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById(Guid cardId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var result =await _carService.GetCarById(cardId);
+            var result = _carService.GetCarById(id);
 
             if (result.Success)
             {
@@ -112,23 +126,23 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add([FromBody] Car car)
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CarCreateDto car)
         {
             var result = _carService.AddCar(car);
 
-            if (result.Success)
+             if (result.Success)
             {
-                return Ok(car);
+                return Ok(result);
             }   
 
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete([FromBody] Car car)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
-            var result = _carService.DeleteCar(car);
+            var result =  _carService.Remove(id);
 
             if (result.Success)
             {
@@ -138,8 +152,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("update")]
-        public IActionResult Update([FromBody] Car car)
+        [HttpPut]
+        public IActionResult Update([FromBody] CarUpdateDto car)
         {
             var result = _carService.UpdateCar(car);
 

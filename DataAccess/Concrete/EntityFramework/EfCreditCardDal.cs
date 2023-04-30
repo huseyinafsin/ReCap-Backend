@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCreditCardDal : Repository<CreditCard>, ICreditCardDal
     {
-        public EfCreditCardDal()
+        public EfCreditCardDal(DbContext context) : base(context)
         {
         }
 

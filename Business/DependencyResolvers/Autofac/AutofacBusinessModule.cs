@@ -7,8 +7,10 @@ using Autofac;
 using Autofac.Core;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.DynamicProxy;
+using AutoMapper;
 using Business.Abstract;
 using Business.Concrete;
+using Business.Mapping;
 using Castle.DynamicProxy;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework;
@@ -17,7 +19,9 @@ using Core.Services;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -25,6 +29,8 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+           
+
             builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
             builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
                         
@@ -60,7 +66,6 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>)).InstancePerDependency();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency();
-
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

@@ -33,33 +33,33 @@ namespace Business.Concrete
         public IResult AddColor(ColorDto color)
         {
             var newColor = new Color() { Name= color.Name };
-            _colorDal.AddAsync(newColor);
+            _colorDal.Add(newColor);
             return new SuccessResult(Messages.ColorAdded);
         }
 
         [CacheRemoveAspect("IColorService.Get")]
         //[SecuredOperation("admin,customer")]
         [ValidationAspect(typeof(ColorValidator))]
-        public async Task<IResult> DeleteColor(Guid id)
+        public  IResult DeleteColor(Guid id)
         {
-            var color =await _colorDal.GetAsync(x=>x.Id==id);
+            var color = _colorDal.Get(x=>x.Id==id);
             _colorDal.Remove(color);
             return new SuccessResult(Messages.ColorDeleted);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public async Task<IDataResult<List<Color>>> GetAllColorsAsync()
+        public  IDataResult<IQueryable<Color>> GetAllColorsAsync()
         {
-            var result =await _colorDal.GetAll();
-            return new SuccessDataResult<List<Color>>(result, Messages.ColorListed);
+            var result = _colorDal.GetAll();
+            return new SuccessDataResult<IQueryable<Color>>(result, Messages.ColorListed);
         }
 
         [CacheAspect]
         //[SecuredOperation("admin,customer")]
-        public async Task<IDataResult<Color>> GetColorById(Guid colorId)
+        public IDataResult<Color> GetColorById(Guid colorId)
         {
-            return new SuccessDataResult<Color>(await _colorDal.GetAsync(c => c.Id == colorId), Messages.ColorFetched);
+            return new SuccessDataResult<Color>( _colorDal.Get(c => c.Id == colorId), Messages.ColorFetched);
         }
 
         [CacheRemoveAspect("IColorService.Get")]

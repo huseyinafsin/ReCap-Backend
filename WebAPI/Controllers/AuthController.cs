@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
             }
 
             var registerResult =await _authService.CustomerRegister(customerForRegister, customerForRegister.Password);
-            var user =await _userService.GetUserById(registerResult.Data.UserId);
+            var user = _userService.GetUserById(registerResult.Data.UserId);
             var result = _authService.CreateAccessToken(user.Data);
             if (result.Success)
             {

@@ -22,10 +22,9 @@ namespace Business.Concrete
             _repository = repository;
         }
 
-
-        public async Task<IDataResult<TEntity>> GetByIdAsync(Guid id)
+        public IDataResult<TEntity> GetByIdAsync(Guid id)
         {
-            var result = await _repository.GetAsync(x => x.Id.Equals(id));
+            var result =  _repository.Get(x => x.Id.Equals(id));
 
             if (result == null)
             {
@@ -41,16 +40,16 @@ namespace Business.Concrete
             return _repository.Where(expression);
         }
 
-        public async Task<IDataResult<IEnumerable<TEntity>>> GetAllAsync()
+        public IDataResult<IEnumerable<TEntity>> GetAllAsync()
         {
-            var result = await _repository.GetAll();
+            var result =  _repository.GetAll();
             return new SuccessDataResult<IEnumerable<TEntity>>(result, typeof(TEntity).Name + " " + Messages.EntityListed);
 
         }
 
-        public async Task<IResult> AnyAsync(Expression<Func<TEntity, bool>> expression)
+        public IResult Any(Expression<Func<TEntity, bool>> expression)
         {
-            var result = await _repository.AnyAsync(expression);
+            var result =  _repository.Any(expression);
             if (result)
                 return new SuccessResult();
 
@@ -58,16 +57,17 @@ namespace Business.Concrete
 
         }
 
-        public async Task<IDataResult<TEntity>> AddAsync(TEntity entity)
+        public IDataResult<TEntity> Add(TEntity entity)
         {
-            await _repository.AddAsync(entity);
+             _repository.Add(entity);
 
             return new SuccessDataResult<TEntity>(entity, typeof(TEntity).Name + " " + Messages.EntityAdded);
         }
 
-        public async Task<IDataResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
+
+        public IDataResult<IEnumerable<TEntity>> AddRange(IEnumerable<TEntity> entities)
         {
-            await _repository.AddRangeAsync(entities);
+             _repository.AddRange(entities);
             return new SuccessDataResult<IEnumerable<TEntity>>(entities, typeof(TEntity).Name + " " + Messages.EntityAdded);
         }
 
@@ -77,18 +77,19 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(result, typeof(TEntity).Name + " " + Messages.EntityUpdated);
         }
 
-        public async Task<IResult> RemoveAsync(Guid id)
+        public IResult Remove(Guid id)
         {
-            var entity = await _repository.GetAsync(x => x.Id.Equals(id));
-            await _repository.Remove(entity);
+            var entity =  _repository.Get(x => x.Id==id);
+             _repository.Remove(entity);
             return new SuccessResult(typeof(TEntity).Name + " " + Messages.EntityDeleted);
         }
 
-        public async Task<IResult> RemoveRangeAsync(IEnumerable<TEntity> entities)
+        public IResult RemoveRange(IEnumerable<TEntity> entities)
         {
-            await _repository.RemoveRange(entities);
+             _repository.RemoveRange(entities);
             return new SuccessResult(typeof(TEntity).Name + " " + Messages.EntityDeleted);
 
         }
+
     }
 }

@@ -9,11 +9,11 @@ namespace Business.Abstract
 {
     public interface ICarImageService
     {
-        Task<IDataResult<List<CarImage>>> GetAllCarImages();
-        Task<IResult> AddCarImage(CarImage carImage, Http.IFormFile file);
+        IDataResult<List<CarImage>> GetAllCarImages();
+        IResult AddCarImage(CarImage carImage, Http.IFormFile file);
         IResult DeleteCarImage(CarImage carImage);
-        Task<IResult> UpdateCarImage(CarImage carImage, Http.IFormFile file);
-        Task<IDataResult<CarImage>> GetCarImageById(Guid carImageId);
-        Task<IDataResult<List<CarImage>>> GetAllCarImagesByCarId(Guid carId);
+        IResult UpdateCarImage(CarImage carImage, Http.IFormFile file);
+        IDataResult<CarImage> GetCarImageById(Guid carImageId);
+        IDataResult<IEnumerable<CarImage>> GetAllCarImagesByCarId(Guid carId);
     }
 }

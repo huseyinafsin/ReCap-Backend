@@ -13,13 +13,11 @@ namespace Business.ValidationRules.FluentValidation
         public CarValidator()
         {
             RuleFor(c => c.CarName).NotEmpty();
-            RuleFor(c => c.ModelYear).NotEmpty();
-            RuleFor(c => c.ModelYear).GreaterThanOrEqualTo(1950);
-            RuleFor(c => c.ModelYear).LessThanOrEqualTo(DateTime.Now.Year);
+            RuleFor(c => c.Model).NotEmpty();
+            RuleFor(c => c.Model).NotEmpty();
+            RuleFor(c => c.Model).NotNull();
             RuleFor(c => c.BrandId).NotEmpty();
             RuleFor(c => c.ColorId).NotEmpty();
-            RuleFor(c => c.DaiyPrice).NotEmpty();
-            RuleFor(c => c.DaiyPrice).GreaterThanOrEqualTo(50);
            
         }
 

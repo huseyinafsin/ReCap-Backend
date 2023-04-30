@@ -31,14 +31,14 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public async Task<IResult>  AddRental(Rental rental)
         {
-          var activeRentals =await _rentalDal.GetAll(x => x.ReturnDate == null);
+          var activeRentals = _rentalDal.GetAll(x => x.ReturnDate == null);
            var ids= activeRentals.Select(x => x.Id).ToList();
 
             if (ids.Contains(rental.CarId))
             {
                 return new ErrorResult(Messages.RentalError);
             }
-            _rentalDal.AddAsync(rental);
+            _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
 
@@ -53,29 +53,29 @@ namespace Business.Concrete
 
         [CacheAspect]
         [SecuredOperation("admin,customer")]
-        public async Task<IDataResult<List<Rental>>> GetAllRentals()
+        public async Task<IDataResult<IQueryable<Rental>>> GetAllRentals()
         {
-            return new SuccessDataResult<List<Rental>>(await _rentalDal.GetAll(), Messages.RentalListed);
+            return new SuccessDataResult<IQueryable<Rental>>( _rentalDal.GetAll(), Messages.RentalListed);
         }
 
         [CacheAspect]
         [SecuredOperation("admin,customer")]
-        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        public IDataResult<IQueryable<RentalDetailDto>> GetRentalDetails()
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.RentalDetails(), Messages.RentalListed);
+            return new SuccessDataResult<IQueryable<RentalDetailDto>>(_rentalDal.RentalDetails(), Messages.RentalListed);
         }    
 
         [CacheAspect]
         [SecuredOperation("admin,customer")]
         public  async Task<IDataResult<Rental>> GetRentalById(Guid rentalId)
         {
-            return new SuccessDataResult<Rental>(await _rentalDal.GetAsync(x => x.Id == rentalId), Messages.RentalFetched);
+            return new SuccessDataResult<Rental>( _rentalDal.Get(x => x.Id == rentalId), Messages.RentalFetched);
         }
 
   
         public async Task<IDataResult<bool>> IsRentable(Guid carId, DateTime rentDate, DateTime returnDate)
         {
-            var result =await _rentalDal.GetAll(r => r.CarId == carId);
+            var result = _rentalDal.GetAll(r => r.CarId == carId);
 
             if (result.Any(r =>
                     r.ReturnDate >= rentDate &&

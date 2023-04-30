@@ -6,21 +6,23 @@ using Core.Utilities.Results;
 using System.Linq.Expressions;
 using System;
 using System.Threading.Tasks;
+using Core.Services;
+using System.Linq;
 
 namespace Business.Abstract
 {
-    public interface ICarService
+    public interface ICarService : IService<Car>
     {
-        Task<IDataResult<List<Car>>> GetAllCars();
-        IResult AddCar(Car car);
-        IResult DeleteCar(Car car);
-        IResult UpdateCar(Car car);
-        Task<IDataResult<Car>> GetCarById(Guid carId);
-        IDataResult<List<CarDetailDto>> GetCarsByBrandId(Guid brandId);
-        IDataResult<List<CarDetailDto>> GetCarsByColorId(Guid colorId);
-        IDataResult<List<CarDetailDto>> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
-        IDataResult<List<CarDetailDto>> CarTopCarsDetails(int top);
+        IDataResult<IQueryable<Car>> GetAllCars();
+        IDataResult<Car> AddCar(CarCreateDto car);
+        //IResult DeleteCar(Guid id);
+        IDataResult<CarUpdateDto> UpdateCar(CarUpdateDto car);
+        IDataResult<Car> GetCarById(Guid carId);
+        IDataResult<IQueryable<CarDetailDto>> GetCarsByBrandId(Guid brandId);
+        IDataResult<IQueryable<CarDetailDto>> GetCarsByColorId(Guid colorId);
+        IDataResult<IQueryable<CarDetailDto>> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
+        IDataResult<IQueryable<CarDetailDto>> CarTopCarsDetails(int top);
         IDataResult<CarDetailDto> CarDetailsById(Guid carId);
-
+        IDataResult<IEnumerable<CarGridDto>> GetPaged(int page, int pageSize);
     }
 }

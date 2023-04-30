@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public  IActionResult GetAll()
         {
-            var result = _brandService.GetAllBrands().Result;
+            var result = _brandService.GetAllBrands();
 
             if (result.Success)
             {
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetById(Guid brandId)
         {
-            var result =await _brandService.GetBrandById(brandId);
+            var result = _brandService.GetBrandById(brandId);
 
             if (result.Success)
             {

@@ -11,14 +11,14 @@ namespace Core.DataAccess
 
     public interface IRepository<TEntity> where TEntity : class,IEntity,new()
     {
-        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression);
+        TEntity Get(Expression<Func<TEntity, bool>> expression);
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression = null);
-        Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> expression = null);
-        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
-        Task<TEntity> AddAsync(TEntity entity);
-        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
+        IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> expression = null);
+        bool Any(Expression<Func<TEntity, bool>> expression);
+        TEntity Add(TEntity entity);
+        IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities);
         TEntity Update(TEntity entity);
-        Task Remove(TEntity entity);
-        Task RemoveRange(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
     }
 }

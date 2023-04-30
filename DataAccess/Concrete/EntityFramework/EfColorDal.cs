@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfColorDal : Repository<Color>, IColorDal
     {
-        public EfColorDal()
+        public EfColorDal(DbContext context) : base(context)
         {
         }
     }

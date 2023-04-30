@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Services;
 using Core.Utilities.Results;
@@ -9,7 +10,7 @@ namespace Business.Abstract;
 
 public interface IPaymentService : IService<Payment>
 {
-    Task<IDataResult<List<Payment>>> GetAllPayment();
+    Task<IDataResult<IQueryable<Payment>>> GetAllPayment();
     IResult AddPayment(Payment payment);
     IResult DeletePayment(Payment payment);
     IResult UpdatePayment(Payment payment);
