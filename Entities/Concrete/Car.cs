@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Entities.Concrete
 {
     public class Car : BaseEntity
-    {   
+    {
 
         public string CarName { get; set; }
         public Guid BrandId { get; set; }
@@ -20,6 +20,7 @@ namespace Entities.Concrete
         public Guid CarTypeId { get; set; }
         public string  Model { get; set; }
         public string Description { get; set; }
+        public bool HasChildSeat { get; set; }
         public int MinFindexScore { get; set; }
 
         public virtual Brand Brand { get; set; }
@@ -27,5 +28,6 @@ namespace Entities.Concrete
         public virtual FuelType FuelType { get; set; }
         public virtual GearType GearType { get; set; }
         public virtual CarType CarType { get; set; }
+        public virtual ICollection<CarImage> CarImages { get; set; } = new HashSet<CarImage>();    
     }
 }

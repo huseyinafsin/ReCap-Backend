@@ -3,6 +3,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,75 +15,66 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : Repository<Car>, ICarDal
     {
+        
         public EfCarDal(DbContext context) : base(context)
         {
         }
 
         public IQueryable<CarDetailDto> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
-            using (ReCapContext context = new ReCapContext())
-            {
-                var result = from ca in context.Cars
-                             join b in context.Brands
-                                 on ca.BrandId equals b.Id
-                             join co in context.Colors
-                                 on ca.ColorId equals co.Id
-                             select new CarDetailDto()
-                             {
-                                 Id = ca.Id,
-                                 BrandId = b.Id,
-                                 ColorId = co.Id,
-                                 CarName = ca.CarName,
-                                 BrandName = b.Name,
-                                 ColorName = co.Name,
-                                 Model = ca.Model,
-                                 //DailyPrice = ca.DaiyPrice,
-                                 Description = ca.Description,
-                                 MinFindexScore = ca.MinFindexScore,
-                                 Images = context.CarImages.Where(x => x.CarId == ca.Id).ToList()
+            var result = _dbSet
+                  .Include(x => x.Brand)
+                  .Include(x => x.Color)
+                  .Include(x => x.CarImages)
+                  .Select(x =>
+                      new CarDetailDto
+                      {
+                          Id = x.Id,
+                          CarName = x.CarName,
+                          BrandName = x.Brand.Name,
+                          BrandId = x.Brand.Id,
+                          ColorId = x.Color.Id,
+                          ColorName = x.Color.Name,
+                          Model = x.Model,
+                          Description = x.Description,
+                          MinFindexScore = x.MinFindexScore,
+                          Images = x.CarImages
 
-                             };
-
-
-                return filter == null ? result.AsQueryable().AsNoTracking() : result.Where(filter).AsQueryable().AsNoTracking();
-            }
+                      }
+                  );
+            return filter==null? result.AsQueryable().AsNoTracking() : result.Where(filter).AsQueryable().AsNoTracking();
         }
 
         public CarDetailDto CarDetailsById(Guid carId)
         {
-            using (ReCapContext context = new ReCapContext())
-            {
-                var result = from ca in context.Cars
-                             join b in context.Brands
-                                 on ca.BrandId equals b.Id
-                             join co in context.Colors
-                                 on ca.ColorId equals co.Id
-                             select new CarDetailDto()
-                             {
-                                 Id = ca.Id,
-                                 CarName = ca.CarName,
-                                 BrandName = b.Name,
-                                 BrandId = b.Id,
-                                 ColorId = co.Id,
-                                 ColorName = co.Name,
-                                 Model = ca.Model,
-                                 //DailyPrice = ca.DaiyPrice,
-                                 Description = ca.Description,
-                                 MinFindexScore = ca.MinFindexScore,
-                                 Images = context.CarImages.Where(x => x.CarId == ca.Id).ToList()
 
-                             };
+            return _dbSet
+            .Include(x => x.Brand)
+            .Include(x => x.Color)
+            .Include(x => x.CarImages)
+            .Select(x => 
+                new CarDetailDto
+                {
+                    Id = x.Id,
+                    CarName = x.CarName,
+                    BrandName = x.Brand.Name,
+                    BrandId = x.Brand.Id,
+                    ColorId = x.Color.Id,
+                    ColorName = x.Color.Name,
+                    Model = x.Model,
+                    Description = x.Description,
+                    MinFindexScore = x.MinFindexScore,
+                    Images = x.CarImages
 
+                }
+            ).FirstOrDefault(x => x.Id == carId);
 
-                return result.FirstOrDefault(x => x.Id == carId);
-            }
         }
 
         public IEnumerable<CarGridDto> GetPaged(int page, int pageSize)
         {
-            using (ReCapContext context = new ReCapContext())
-            {
-                return context.Cars
+
+                return _dbSet
                 .Include(x => x.Brand)
                 .Include(x => x.Color)
                 .Include(x => x.CarType)
@@ -91,6 +83,8 @@ namespace DataAccess.Concrete.EntityFramework
                 .OrderBy(x => x.InsertedAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .AsQueryable()
+                .AsNoTracking()
                 .Select(x => new CarGridDto
                 {
                     Id = x.Id,
@@ -103,7 +97,7 @@ namespace DataAccess.Concrete.EntityFramework
                     Gear = x.GearType.Name,
                     MinFindexScore = x.MinFindexScore,
                 });
-            }
+
         }
     }
 }

@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getallcarimagesbyid")]
+        [HttpGet("carImages/{carId}")]
         public async Task<IActionResult> GetAllCarImagesByCarId(Guid carId)
         {
             var result = _carImageService.GetAllCarImagesByCarId(carId);
@@ -70,9 +70,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload(  [FromForm] CarImage carImage, [FromForm] IFormFile file)
+        public async Task<IActionResult> Upload(  [FromForm] Guid carId, [FromForm] IFormFile file)
         {
-            var result = _carImageService.AddCarImage(carImage, file);
+            var result = _carImageService.AddCarImage(carId, file);
 
             if (result.Success)
             {
@@ -82,10 +82,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete([FromBody]CarImage carImage )
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id )
         {
-            var result = _carImageService.DeleteCarImage(carImage);
+            var result = _carImageService.DeleteCarImage(id);
 
             if (result.Success)
             {

@@ -12,9 +12,11 @@ namespace DataAccess.Concrete
 {
     public class ReCapContext: DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+
+        public ReCapContext(DbContextOptions<ReCapContext> options)
+             : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=LPTNET2116\SQLEXPRESS;Database=ReCap;Trusted_Connection=True;");
         }
 
         public Task<int> SaveChangesAsync()

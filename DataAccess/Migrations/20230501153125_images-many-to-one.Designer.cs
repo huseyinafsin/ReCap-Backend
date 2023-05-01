@@ -4,6 +4,7 @@ using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ReCapContext))]
-    partial class ReCapContextModelSnapshot : ModelSnapshot
+    [Migration("20230501153125_images-many-to-one")]
+    partial class imagesmanytoone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,7 +290,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarType", "system");
+                    b.ToTable("CarTypes");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Color", b =>
@@ -317,7 +319,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Color", "system");
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("Entities.Concrete.CreditCard", b =>
@@ -433,7 +435,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelType", "system");
+                    b.ToTable("FuelTypes");
                 });
 
             modelBuilder.Entity("Entities.Concrete.GearType", b =>
@@ -462,7 +464,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GearType", "system");
+                    b.ToTable("GearTypes");
                 });
 
             modelBuilder.Entity("Entities.Concrete.InsuranceType", b =>
@@ -491,7 +493,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InsuranceType", "system");
+                    b.ToTable("InsuranceTypes");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Language", b =>
@@ -523,7 +525,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Language", "system");
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("Entities.Concrete.MailSubscribe", b =>
@@ -581,7 +583,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Page", "system");
+                    b.ToTable("Pages");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>
@@ -711,7 +713,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PageId");
 
-                    b.ToTable("Translation", "system");
+                    b.ToTable("Translations");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Car", b =>

@@ -31,16 +31,16 @@ namespace Business.Concrete
             return new SuccessDataResult<IEnumerable<CarImage>>(result, Messages.CarImageListed);
         }
 
-        [SecuredOperation("carimage.add,customer,admin")]
+        //[SecuredOperation("carimage.add,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
-        public IResult AddCarImage(CarImage carImage, Http.IFormFile file)
-        {
-            var result = BusinessRules.Run((Task<IResult>)CheckImageRestrictionAsync(carImage.CarId));
+        public IResult AddCarImage(Guid carId, Http.IFormFile file)
+        {   
+            //var result = BusinessRules.Run((Task<IResult>)CheckImageRestrictionAsync(carId));
 
-            if (result != null)
-            {
-                return result;
-            }
+            //if (result != null)
+            //{
+            //    return result;
+            //}
 
             var uploadResult = FileHelperManager.Upload(file, Paths.CarImages);
 
@@ -49,10 +49,17 @@ namespace Business.Concrete
                 return new ErrorResult();
             }
             var path = uploadResult.Data.Remove(0,8);
-            carImage.ImagePath = path;
 
-            carImage.Date =DateTime.Now;
-            _carImageDal.Add(carImage);
+            var image =new CarImage()
+            {
+                CarId= carId,
+                ImagePath= path,
+                Date= DateTime.Now, 
+                InsertedAt= DateTime.Now,
+                InsertedUserId= Guid.Empty,
+            };
+
+            _carImageDal.Add(image);
 
             return new SuccessResult();
 
@@ -61,19 +68,19 @@ namespace Business.Concrete
 
 
 
-        [SecuredOperation("carimage.delete,customer,admin")]
+        //[SecuredOperation("carimage.delete,customer,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
-        public IResult DeleteCarImage(CarImage carImage)
+        public IResult DeleteCarImage(Guid id)
         {
-
-            var deleteResult = FileHelperManager.Delete(carImage.ImagePath);
+            var image = _carImageDal.Get(x => x.Id == id);
+            var deleteResult = FileHelperManager.Delete(image.ImagePath);
 
             if (!deleteResult.Success)
             {
                 return new ErrorResult();
             }
-            _carImageDal.Remove(carImage);
-            return new SuccessResult();
+            _carImageDal.Remove(image);
+            return new SuccessResult("Image has been deleted");
         }
 
         [SecuredOperation("carimage.update,customer,admin")]
