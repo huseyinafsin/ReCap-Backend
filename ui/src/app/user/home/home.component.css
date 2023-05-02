@@ -1,0 +1,65 @@
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0 ;
+   width: 100%;
+  height: 100%;
+   object-fit: cover;
+}
+.vid-loop{}
+
+.campain{
+  position: relative;
+  color: white;
+  left: 0;
+  bottom: 48px;
+  z-index: 1;
+  padding: 0 16px;
+  bottom: 104px;
+  width: 50%;
+  height: 250px;
+  margin-top: 500px;
+  margin-left: 25%;
+
+
+}
+
+.campain > h1{
+  color: rgb(242, 242, 242);
+  opacity: 0.8;
+  margin-bottom: 32px;
+  width: 200px;
+  height: 10px;
+
+}
+.campain > p{
+  color: rgb(242, 242, 242);
+  opacity: 0.8;
+  margin-bottom: 32px;
+  width: 200px;
+  height: 10px;
+
+}
+
+
+.card-title{
+  color: aliceblue;
+}
+
+.campain-btn{
+  font-size: 1rem;
+  border-radius: 30px;
+  display: inline-block;
+  letter-spacing: 0.015em;
+  background-color: #17ff74;
+  border: 2px solid transparent;
+  transition: background-color 300ms ease-in-out,border-color 300ms ease-in-out,color 300ms ease-in-out;
+  padding: 14px 54px;
+  color: #2e2e2e;
+  font-weight: 500;
+  height: 60px;
+  width: 300px;
+
+
+}

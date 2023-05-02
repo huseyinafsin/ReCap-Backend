@@ -1,0 +1,26 @@
+.wrapper {
+  width: 100%;
+  @include ltr-rtl("padding-left", var(--cui-sidebar-occupy-start, 0));
+  @include ltr-rtl("padding-right", var(--cui-sidebar-occupy-end, 0));
+  will-change: auto;
+  @include transition(padding .15s);
+}
+.btn-long{
+  width: 200px;
+  margin-left: 0;
+  padding-left: 0;
+}
+.icon-danger{
+  color:  #e55353;;
+  }
+
+.icon-warn{
+    color:  #f9b115;;
+}
+.icon-success{
+  color:  #2eb85c;;;
+}
+
+body{
+  background-color: #2eb85c;
+}

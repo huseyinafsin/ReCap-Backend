@@ -1,0 +1,19 @@
+<div *ngIf="dataLoaded == false" class="spinner-border text-danger" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="mb-3">
+  <div class="form-control" style="background-color: #343a40">
+    <label for="filterText" style="color: aliceblue;"  class="form-label">Firma Ara</label>
+  </div>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"  placeholder="arama ifadesi giriniz">
+</div>
+<div *ngIf="filterText" class="alert alert-success" >
+  {{filterText}} aradınız
+</div>
+<ul *ngIf="dataLoaded==true" class="list-group">
+  <li (click)="setAllBrandClass()" [class]="getAllBrandClass()" routerLink="/" >Tüm Markalar</li>
+  <li (click)="setCurrentBrandClass(brand)"
+  routerLink="/brand/{{brand.id}}"
+  *ngFor="let brand of brands | brandFilter:filterText"
+  [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
+</ul>

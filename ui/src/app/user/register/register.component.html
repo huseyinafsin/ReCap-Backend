@@ -1,0 +1,93 @@
+<body class="text-center">
+  <main class="form-signin">
+      <form [formGroup]="registerForm">
+        <img
+          class="mb-4"
+          src="assets/img/login.png"
+          alt=""
+          width="128"
+          height="128"
+        />
+        <h1 class="h3 mb-3 fw-normal">Kayıt Ol</h1>
+
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            placeholder="Hüseyin"
+            formControlName="firstName"
+          />
+          <label for="floatingInput">İsim</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            placeholder="Afşin"
+            formControlName="lastName"
+          />
+          <label for="floatingInput">Soyisim</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="email"
+          />
+          <label for="floatingInput">E-Posta</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="companyName"
+          />
+          <label for="floatingInput">Şirket İsmi</label>
+        </div>
+
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Parola"
+            formControlName="password"
+          />
+          <label for="floatingPassword">Parola</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="passwordAgain"
+            placeholder="Parola Doğrula"
+            formControlName="passwordAgain"
+          />
+          <label for="floatingPassword">Parola</label>
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me" /> Beni Hatırla
+          </label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!registerForm.valid" (click)="register()">
+          Kayıt Ol
+        </button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+      </form>
+
+  </main>
+</body>

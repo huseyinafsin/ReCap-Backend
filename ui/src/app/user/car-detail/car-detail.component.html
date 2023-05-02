@@ -1,0 +1,339 @@
+<!-- <section class="ftco-section ftco-car-details">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="car-details">
+          <ngb-carousel>
+            <ng-template *ngFor="let image of images" ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="apiPath+image.imagePath" alt="Random first slide" class="d-block w-100"
+                  style="width: auto; height: auto;">
+              </div>
+            </ng-template>
+            <ng-template *ngIf="images.length==0" ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="apiPath+'Images/CarImages/default.jpg'">
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <a class="btn btn-primary py-3 px-4 center" style="left: 50%;margin-right: 50%;">Reserve Your Perfect Car</a>
+    <div class="row">
+      <div class="col-md-12 pills">
+        <div class="bd-example bd-example-tabs">
+          <div class="d-flex justify-content-center">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+                  role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab"
+                  aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab"
+                  aria-controls="pills-review" aria-expanded="true">Review</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+              aria-labelledby="pills-description-tab">
+              <div class="row">
+                <div class="col-md-4">
+                  <ul class="features">
+                    <li class="check"><i class="fas fa-brush"></i>{{car.colorName}}</li>
+                    <li class="check"><i class="far fa-copyright"></i>{{car.brandName}}</li>
+                    <li class="check"><i class="fas fa-car"></i>{{car.carName}}</li>
+                    <li class="check"><i class="fas fa-calendar-week"></i>{{car.modelYear}}</li>
+                    <li class="check"> <i class="fas fa-check-double"></i>Music</li>
+                  </ul>
+                </div>
+                <div class="col-md-4">
+                  <ul class="features">
+                    <li class="check"><i class="fas fa-check-double"></i>Seat Belt</li>
+                    <li class="remove"><i class="fas fa-check-double"></i>Sleeping Bed</li>
+                    <li class="check"><i class="fas fa-check-double"></i>Water</li>
+                    <li class="check"><i class="fas fa-check-double"></i>Bluetooth</li>
+                    <li class="remove"><i class="fas fa-check-double"></i>Onboard computer</li>
+                  </ul>
+                </div>
+                <div class="col-md-4">
+                  <ul class="features">
+                    <li class="check"><i class="fas fa-check-double"></i>Audio input</li>
+                    <li class="check"><i class="fas fa-check-double"></i>Long Term Trips</li>
+                    <li class="check"><i class="fas fa-check-double"></i>Car Kit</li>
+                    <li class="check"><i class="fas fa-check-double"></i>Remote central locking</li>
+                    <li class="check"><i class="fas fa-check-double"></i>Climate control</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+              <p>{{car.description }}</p>
+            </div>
+            <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+              <div class="row">
+                <div class="col-md-7">
+                  <h3 class="head">23 Reviews</h3>
+                  <div class="review d-flex">
+                    <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                    <div class="desc">
+                      <h4>
+                        <span class="text-left">Jacob Webb</span>
+                        <span class="text-right">14 March 2018</span>
+                      </h4>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                        </span>
+                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                      </p>
+                      <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
+                        skyline of her hometown Bookmarksgrov</p>
+                    </div>
+                  </div>
+                  <div class="review d-flex">
+                    <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                    <div class="desc">
+                      <h4>
+                        <span class="text-left">Jacob Webb</span>
+                        <span class="text-right">14 March 2018</span>
+                      </h4>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                        </span>
+                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                      </p>
+                      <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
+                        skyline of her hometown Bookmarksgrov</p>
+                    </div>
+                  </div>
+                  <div class="review d-flex">
+                    <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
+                    <div class="desc">
+                      <h4>
+                        <span class="text-left">Jacob Webb</span>
+                        <span class="text-right">14 March 2018</span>
+                      </h4>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                        </span>
+                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                      </p>
+                      <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
+                        skyline of her hometown Bookmarksgrov</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="rating-wrap">
+                    <h3 class="head">Give a Review</h3>
+                    <div class="wrap">
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          (98%)
+                        </span>
+                        <span>20 Reviews</span>
+                      </p>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          (85%)
+                        </span>
+                        <span>10 Reviews</span>
+                      </p>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          (70%)
+                        </span>
+                        <span>5 Reviews</span>
+                      </p>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          (10%)
+                        </span>
+                        <span>0 Reviews</span>
+                      </p>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          <i class="ion-ios-star"></i>
+                          (0%)
+                        </span>
+                        <span>0 Reviews</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Cars-->
+<!-- <section class="ftco-section ftco-no-pt">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+        <span class="subheading">Choose Car</span>
+        <h2 class="mb-2">Related Cars</h2>
+      </div>
+    </div>
+    <div class="row">
+      <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide>
+          <div class="col-md-4">
+            <div class="car-wrap rounded ftco-animate">
+              <div class="img rounded d-flex align-items-end">
+              </div>
+              <div class="text">
+                <h2 class="mb-0"><a href="assets/img/car-single.html">Mercedes Grand Sedan</a></h2>
+                <div class="d-flex mb-3">
+                  <span class="cat">Cheverolet</span>
+                  <p class="price ml-auto">$500 <span>/day</span></p>
+                </div>
+                <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a
+                    href="assets/img/car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template carouselSlide>
+          <div class="col-md-4">
+          <div class="car-wrap rounded ftco-animate">
+            <div class="img rounded d-flex align-items-end">
+            </div>
+            <div class="text">
+              <h2 class="mb-0"><a href="assets/img/car-single.html">Range Rover</a></h2>
+              <div class="d-flex mb-3">
+                <span class="cat">Subaru</span>
+                <p class="price ml-auto">$500 <span>/day</span></p>
+              </div>
+              <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a
+                  href="assets/img/car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+            </div>
+          </div>
+        </div></ng-template>
+
+      <ng-template carouselSlide>
+        <div class="col-md-4">
+          <div class="car-wrap rounded ftco-animate">
+            <div class="img rounded d-flex align-items-end" >
+            </div>
+            <div class="text">
+              <h2 class="mb-0"><a href="assets/img/car-single.html">Mercedes Grand Sedan</a></h2>
+              <div class="d-flex mb-3">
+                <span class="cat">Cheverolet</span>
+                <p class="price ml-auto">$500 <span>/day</span></p>
+              </div>
+              <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a
+                  href="assets/img/car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template carouselSlide>
+        <div class="col-md-4">
+          <div class="car-wrap rounded ftco-animate">
+            <div class="img rounded d-flex align-items-end" >
+            </div>
+            <div class="text">
+              <h2 class="mb-0"><a href="assets/img/car-single.html">Mercedes Grand Sedan</a></h2>
+              <div class="d-flex mb-3">
+                <span class="cat">Cheverolet</span>
+                <p class="price ml-auto">$500 <span>/day</span></p>
+              </div>
+              <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a
+                  href="assets/img/car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+    </owl-carousel-o>
+    </div>
+  </div>
+</section> -->
+
+<!-- loader -->
+<div id="ftco-loader" [ngClass]="dataLoaded ? null : 'show fullscreen' "><svg class="circular" width="48px"
+    height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+  </svg></div>
+<script>
+  $scope.carouselNext = function () {
+    $('#carousel-main').carousel('carousel-control-prev');
+  }
+  $scope.carouselPrev = function () {
+    $('#carousel-main').carousel('carousel-control-prev');
+  }
+</script>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.easing.1.3.js"></script>
+<script src="assets/js/jquery.waypoints.min.js"></script>
+<script src="assets/js/jquery.stellar.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="assets/js/aos.js"></script>
+<script src="assets/js/jquery.animateNumber.min.js"></script>
+<script src="assets/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/jquery.timepicker.min.js"></script>
+<script src="assets/js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="assets/js/google-map.js"></script>
+<script src="assets/js/main.js"></script> -->

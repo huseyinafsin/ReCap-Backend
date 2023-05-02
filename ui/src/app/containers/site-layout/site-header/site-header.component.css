@@ -1,0 +1,21 @@
+
+
+.header {
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  width: 40%;
+  --cui-header-color: rgb(230, 232, 233);
+  --cui-header-nav-link-padding-x: 2.5rem;
+  justify-content: space-around;
+}
+
+.header-brand{
+  float: left;
+}
+.header-nav .nav-link {
+
+  /* font-family: "Lexend Tera",Helvetica,sans-serif;
+  font-size: medium; */
+  --cui-header-color: rgb(254, 255, 255);
+
+}

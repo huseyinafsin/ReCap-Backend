@@ -1,0 +1,36 @@
+<app-search ></app-search>
+<div class="container-fluid py-5">
+  <div class="container pt-5 pb-3">
+      <h1 class="display-4 text-uppercase text-center mb-5">Arabalar</h1>
+      <div class="row" >
+          <div class="col-lg-4 col-md-6 mb-2" *ngFor="let car of cars">
+              <div class="rent-item mb-4">
+                  <img class="img-fluid mb-4" [src]="getImageUrl(car.id)" alt="">
+                  <h4 class="text-uppercase mb-4">{{car.brandName+" "+ car.carName}}</h4>
+                  <div class="d-flex justify-content-center mb-4">
+                      <div class="px-2">
+                          <i class="fa fa-car text-primary mr-1"></i>
+                          <span>{{car.modelYear}}</span>
+                      </div>
+                      <div class="px-2 border-left border-right">
+                          <i class="fa fas fa-palette text-primary mr-1"></i>
+                          <span>{{car.colorName}}</span>
+                      </div>
+                      <div class="px-2">
+                          <i class="fas text-primary fa-star-half-alt"></i>
+                          <span>{{car.minFindexScore}}</span>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center mb-4">
+                    <div class="px-2">
+
+                       <h4><span ><i class="fas fa-lira-sign"></i> {{car.dailyPrice}}</span></h4>
+                      </div>
+                  </div>
+                  <a class="btn btn-primary px-3" [routerLink]="'/rental/details/'+car.id"> Kirala</a>
+                  <a class="btn btn-secondary btn-blue px-3" [routerLink]="'/car/details/'+car.id">İncele</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+
+
+
+
+<div class="row m-3 ">
+  <div class="col-md-4 justify-content-sm-around  position-relative">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-long btn-primary position-absolute  start-0  " >
+      Ekle
+    </button>
+  </div>
+  <div class="col-md-8">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">
+    <h4 class="text-secondary">Model Ekle</h4>
+  </div>
+  <div class="card-body">
+<table class="table ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Model</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>
+          <a  data-target="#editModal"  data-toggle="modal">
+             <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
+          </a>
+          <!-- Modal -->
+          <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="text-secondary">Düzenle</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body">
+
+                      <form>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">İsim</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                  <button type="button" class="btn btn-primary">Kaydet</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </td>
+      <td>
+        <a data-target="#deleteModal" data-toggle="modal">
+          <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
+        </a>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="text-secondary">Silmek istiyor musunuz?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-sm-around">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-danger">Sil</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>
+        <a>
+           <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
+        </a>
+    </td>
+    <td>
+      <a>
+        <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
+      </a>
+    </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>
+        <a>
+           <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
+        </a>
+    </td>
+    <td>
+      <a>
+        <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
+      </a>
+    </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+</div>
