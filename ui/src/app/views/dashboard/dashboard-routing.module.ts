@@ -4,8 +4,13 @@ import { ColorListComponent } from './color-list/color-list.component';
 import { DashboardComponent } from './dashboard.component';
 import { BrandListComponent } from './brand-list/brand-list.component';
 import { CarListComponent } from './car-list/car-list.component';
-import { CarDetailComponent } from 'src/app/user/car-detail/car-detail.component';
 import { CarAddComponent } from './car-add/car-add.component';
+import { CarEditComponent } from './car-edit/car-edit.component';
+import { CarDetailComponent } from './car-detail/car-detail.component';
+import { InsuranceTypeComponent } from './insurance-type/insurance-type.component';
+import { CarTypeComponent } from './car-type/car-type.component';
+import { FuelTypeComponent } from './fuel-type/fuel-type.component';
+import { GearTypeComponent } from './gear-type/gear-type.component';
 
 const routes: Routes = [
   {
@@ -21,17 +26,35 @@ const routes: Routes = [
     component:BrandListComponent
   },
   {
+    path: 'geartype',
+    component: GearTypeComponent
+  }, {
+    path: 'fueltype',
+    component: FuelTypeComponent
+  }, {
+    path: 'cartype',
+    component: CarTypeComponent
+  }, {
+    path: 'insurancetype',
+    component: InsuranceTypeComponent
+  },
+  {
     path: 'cars',
     component:CarListComponent
   },
   {
-    path: 'cars/detail/:carId',
-    component:CarDetailComponent
+    path: 'cars/detail/:id',
+    component: CarDetailComponent
+  },
+  {
+    path: 'cars/edit/:id',
+    component: CarEditComponent
   },
   {
     path: 'cars/add',
     component:CarAddComponent
   },
+
   {
     path: 'dashboard',
     loadChildren: () =>

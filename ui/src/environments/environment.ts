@@ -9,6 +9,15 @@ export const environment = {
   findexScore:1500
 };
 
+export enum SystemTable{
+  Color="color",
+  Brand="brand",
+  GearType="geartype",
+  FuelType="fueltype",
+  InsuranceType="insurancetype",
+  CarType="cartype",
+
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

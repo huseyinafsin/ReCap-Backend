@@ -23,6 +23,6 @@ namespace Business.Abstract
         IDataResult<IQueryable<CarDetailDto>> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
         IDataResult<IQueryable<CarDetailDto>> CarTopCarsDetails(int top);
         IDataResult<CarDetailDto> CarDetailsById(Guid carId);
-        IDataResult<IEnumerable<CarGridDto>> GetPaged(int page, int pageSize);
+        IDataResult<CarGridModelDto> GetPaged(int page, int pageSize);
     }
 }

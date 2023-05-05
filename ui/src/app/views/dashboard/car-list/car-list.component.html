@@ -17,116 +17,80 @@
   </div>
 </div>
 
-
-<div class="card">
+<div class="card" *ngIf="cars">
   <div class="card-header">
     <h4 class="text-secondary">Model Ekle</h4>
   </div>
   <div class="card-body">
 <table class="table ">
   <thead>
-    <tr>
+    <tr >
       <th scope="col">#</th>
+      <th scope="col">Name</th>
       <th scope="col">Model</th>
+      <th scope="col">Type</th>
+      <th scope="col">Fuel</th>
+      <th scope="col">Gear</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Color</th>
+      <th scope="col">Findex</th>
       <th scope="col"></th>
       <th scope="col"></th>
+
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
+    <tr *ngFor="let car of cars; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{car.carName}}</td>
+      <td>{{car.model}}</td>
+      <td>{{car.carType}}</td>
+      <td>{{car.fuel}}</td>
+      <td>{{car.gear}}</td>
+      <td>{{car.brand}}</td>
+      <td>{{car.color}}</td>
+      <td>{{car.minFindexScore}}</td>
       <td>
-          <a  data-target="#editModal"  data-toggle="modal">
+          <a data-target="#editModal"  data-toggle="modal">
              <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
           </a>
-          <!-- Modal -->
-          <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="text-secondary">Düzenle</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="card">
-                    <div class="card-body">
-
-                      <form>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">İsim</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                      </form>
-
-                    </div>
-                  </div>
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                  <button type="button" class="btn btn-primary">Kaydet</button>
-                </div>
-              </div>
-            </div>
-          </div>
       </td>
       <td>
-        <a data-target="#deleteModal" data-toggle="modal">
+        <a (click)="open(deleteModal)">
           <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
         </a>
             <!-- Modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="text-secondary">Silmek istiyor musunuz?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-footer d-flex justify-content-sm-around">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                    <button type="button" class="btn btn-danger">Sil</button>
-                  </div>
+            <ng-template #deleteModal let-modal>
+              <div class="modal-body">
+                <div class="modal-header">
+                 </div>
+                 <div class="modal-body">
+                  <p>Bu öğe silinecek onaylıyor musunuz?</p>
                 </div>
               </div>
-            </div>
+              <div class="modal-footer">
+                <button (click)="modal.close('Save click')" type="submit" class="btn btn-outline-secondary" >Kapat</button>
+                <button (click)="onDelete(car.id); modal.close('Save click')" type="submit" class="btn btn-outline-primary" >Onayla</button>
+              </div>
+            </ng-template>
       </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>
-        <a>
-           <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
-        </a>
-    </td>
-    <td>
-      <a>
-        <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
-      </a>
-    </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>
-        <a>
-           <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
-        </a>
-    </td>
-    <td>
-      <a>
-        <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
-      </a>
-    </td>
     </tr>
 
   </tbody>
+
 </table>
+<nav aria-label="..."  >
+  <ul class="pagination">
+    <li class="page-item " [ngClass]="(page==1)?'disabled':''" >
+      <a class="page-link" (click)="getCars(page-1)" tabindex="-1" >Previous</a>
+    </li>
+    <li *ngFor="let n of getLoopItems(); let i =index" class="page-item " [ngClass]="(n && page)?'':'active'"  >
+      <a class="page-link"  (click)="getCars(n+1)">{{n+1}} <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item" [ngClass]="(page==totalPage)?'disabled':''" >
+      <a class="page-link" (click)="getCars(page+1)">Next</a>
+    </li>
+  </ul>
+</nav>
 </div>
 </div>

@@ -1,135 +1,105 @@
 
 
 
-
-<div class="row m-3 ">
-  <div class="col-md-4 justify-content-sm-around  position-relative">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-long btn-primary position-absolute  start-0  "  data-toggle="modal" data-target="#exampleModal">
-      Ekle
-    </button>
+<div class="row m-2 mb-lg-2 mb-sm-2 d-flex justify-content-between    w-100 ">
+  <!-- Button trigger modal -->
+  <button (click)="open(createModal)" type="button" class="btn btn-long btn-primary " >
+    Ekle
+  </button>
+  <input #v (change)="filterText"  class="form-control w-50 float-right float-md-right mr-2 mr-lg-2">
+  <button (click)="onSearch(v)" type="button" class="btn btn-long btn-outline-secondary ">
+    Ara
+  </button>
+</div>
 
 <!-- Modal -->
-<div #createModal class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="text-secondary">Renk Ekle</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card">
-          <div class="card-body">
-
-            <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-              <div class="mb-3">
-                <label  for="exampleInputEmail1" class="form-label">İsim</label>
-                <input name="name"  ngModel required #name="ngModel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-              </div>
-              <button class="btn btn-primary d-flex float-left" type="submit">Submit</button>
-              <button type="button" class="btn btn-secondary d-flex float-right" data-dismiss="modal">Kapat</button>
-            </form>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+<ng-template  #createModal let-modal>
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Renk Ekle</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 </div>
-  </div>
-  <div class="col-md-8">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-secondary" type="submit">Search</button>
-    </form>
-  </div>
+<div class="modal-body">
+  <form #fc="ngForm" >
+    <fieldset >
+      <div class="mb-3">
+        <label for="disabledTextInput" class="form-label">color</label>
+        <input name="name" ngModel  required  type="text" id="disabledTextInput" class="form-control">
+      </div>
+    </fieldset>
+  </form>
 </div>
+<div class="modal-footer">
+  <button (click)="onSubmit(fc); modal.close('Save click')" type="submit" class="btn btn-outline-dark" >Kaydet</button>
+</div>
+</ng-template>
 
-
-<div class="card">
-  <div class="card-header">
-    <h4 class="text-secondary">Renk Ekle</h4>
-  </div>
-  <div class="card-body">
+<c-card >
+  <c-card-header >Markalar</c-card-header>
+<c-card-body >
 <table class="table ">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Renk</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let color of colors">
-      <th scope="row">1</th>
-      <td>{{color.name}}</td>
-      <td>
-          <a  data-target="#editModal"  data-toggle="modal">
-             <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
-          </a>
-          <!-- Modal -->
-          <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="text-secondary">Düzenle</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="card">
-                    <div class="card-body">
+<thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Marka</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let color of colors | systemFilter:filterText; let i=index">
+    <th scope="row">{{i+1}}</th>
+    <td>{{color.name}}</td>
+    <td>
 
-                      <form>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">İsim</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                      </form>
-
-                    </div>
-                  </div>
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                  <button type="button" class="btn btn-primary">Kaydet</button>
-                </div>
-              </div>
-            </div>
+        <!-- Modal -->
+        <ng-template #editModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Renk Ekle</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
           </div>
-      </td>
-      <td>
-        <a data-target="#deleteModal" data-toggle="modal">
-          <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
-        </a>
-            <!-- Modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="text-secondary">Silmek istiyor musunuz?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-footer d-flex justify-content-sm-around">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                    <button type="button" (click)="onDelete(color.id)" class="btn btn-danger">Sil</button>
-                  </div>
+          <div class="modal-body">
+            <form #fe="ngForm" >
+              <fieldset >
+                  <input hidden name="id" [(ngModel)]="color.id">
+              </fieldset>
+              <fieldset >
+                <div class="mb-3">
+                  <label for="disabledTextInput" class="form-label">color</label>
+                  <input name="name" [(ngModel)]="color.name" type="text" id="disabledTextInput" class="form-control">
                 </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button (click)="onUpdate(fe); modal.close('Save click')" type="submit" class="btn btn-outline-dark" >Kaydet</button>
+          </div>
+        </ng-template>
+        <a (click)="open(editModal)">
+          <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
+        </a>
+    </td>
+    <td>
+      <a  (click)="open(deleteModal)" data-toggle="modal">
+        <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-danger" fontIcon="delete"></mat-icon>
+      </a>
+          <!-- Modal -->
+          <ng-template #deleteModal let-modal>
+            <div class="modal-body">
+              <div class="modal-header">
+               </div>
+               <div class="modal-body">
+                <p>Bu öğe silinecek onaylıyor musunuz?</p>
               </div>
             </div>
-      </td>
-    </tr>
-  </tbody>
+            <div class="modal-footer">
+              <button (click)="modal.close('Save click')" type="submit" class="btn btn-outline-secondary" >Kapat</button>
+              <button (click)="onDelete(color.id); modal.close('Save click')" type="submit" class="btn btn-outline-primary" >Onayla</button>
+            </div>
+          </ng-template>
+    </td>
+  </tr>
+</tbody>
 </table>
-</div>
-</div>
+</c-card-body>
+</c-card>
+

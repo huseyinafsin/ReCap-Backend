@@ -315,3 +315,31 @@ h6,
     background: linear-gradient(rgba(28, 30, 50, .9), rgba(28, 30, 50, .9)), url(../assets/images/car-1.jpg);
     background-attachment: fixed;
 }
+
+
+.custom-ngb-modal-window {
+  z-index: 1000 !important;
+  margin-top: 10%;
+  border-radius: 5;
+ }
+
+ .custom-ngb-modal-backdrop {
+  z-index: 0 !important;
+ }
+
+ .btn-long{
+  width: 200px;
+  margin-left: 0;
+  padding-left: 0;
+}
+.icon-danger{
+  color:  #e55353;;
+  }
+
+.icon-warn{
+    color:  #f9b115;;
+}
+.icon-success{
+  color:  #2eb85c;;;
+}
+

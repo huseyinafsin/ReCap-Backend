@@ -71,10 +71,10 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
 
-        public IEnumerable<CarGridDto> GetPaged(int page, int pageSize)
+        public CarGridModelDto GetPaged(int page, int pageSize)
         {
 
-                return _dbSet
+                var result = _dbSet
                 .Include(x => x.Brand)
                 .Include(x => x.Color)
                 .Include(x => x.CarType)
@@ -98,6 +98,10 @@ namespace DataAccess.Concrete.EntityFramework
                     MinFindexScore = x.MinFindexScore,
                 });
 
+                var totalPage = _dbSet.Count() / pageSize;
+
+            return new CarGridModelDto { CarGridDtos = result, Count = totalPage };
+                
         }
     }
 }

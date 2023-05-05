@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-import { UserModule } from './user/user.module';
+import { UserModule } from './views/user/user.module';
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -53,7 +53,7 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { CardsComponent } from './views/base/cards/cards.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -102,7 +102,8 @@ const APP_CONTAINERS = [
     HttpClientModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
-    })
+    }),
+    NgbModule
   ],
   providers: [
     {

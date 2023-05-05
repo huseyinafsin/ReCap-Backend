@@ -15,6 +15,6 @@ namespace DataAccess.Abstract
         //List<CarDetailDto> CarDetails(CarDetailFilter filter);
         IQueryable<CarDetailDto> CarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
         CarDetailDto CarDetailsById(Guid carId);
-        IEnumerable<CarGridDto> GetPaged( int page,  int pageSize);
+        CarGridModelDto GetPaged( int page,  int pageSize);
     }
 }

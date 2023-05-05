@@ -1,10 +1,17 @@
+import { Guid } from "guid-typescript"
+
 export class Car{
-  id:number
+  id:Guid
   carName:string
-  brandId:number
-  colorId:number
-  modelYear:number
-  daiyPrice:number
+  brandId:Guid
+  colorId:Guid
+  model : Guid
+  carTypeId :Guid
+  fuelTypeId :Guid
+  gearTypeId :Guid
+  insertedUserId:Guid
   description:string
   minFindexScore:number
 }
+
+

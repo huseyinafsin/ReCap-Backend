@@ -36,6 +36,21 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Rental',
+    url: '/dashboard/rentals',
+    iconComponent: { name: 'cil-speedometer' },
+    children: [
+      {
+        name: 'List',
+        url: '/dashboard/rentals',
+      },
+      {
+        name: 'New Rental',
+        url: '/dashboard/rentals/add',
+      }
+    ]
+  },
+  {
     name: 'Customers',
     url: '/dashboard/customers',
     iconComponent: { name: 'cil-people' },
@@ -63,37 +78,6 @@ export const navItems: INavData[] = [
       }
     ]
   },
-  {
-    name: 'Colors',
-    url: '/dashboard/colors',
-    iconComponent: { name: 'cil-puzzle' },
-    children: [
-      {
-        name: 'List',
-        url: '/dashboard/colors',
-      },
-      {
-        name: 'New Color',
-        url: '/dashboard/colors/add',
-      }
-    ]
-  },
-  {
-    name: 'Brands',
-    url: '/dashboard/brands',
-    iconComponent: { name: 'cil-puzzle' },
-    children: [
-      {
-        name: 'Brands',
-        url: '/dashboard/brands',
-      },
-      {
-        name: 'New Color',
-        url: '/dashboard/brands/add',
-      }
-    ]
-  },
-
 {
         name: 'Translate',
         url: '/dashboard/translates',
@@ -113,6 +97,31 @@ export const navItems: INavData[] = [
         name: 'Options',
         url: '/dashboard/options',
         iconComponent: { name: 'cil-puzzle' },
-
+        children: [
+          {
+            name: 'Car Type',
+            url: '/dashboard/cartype',
+          },
+          {
+            name: 'Gear Type',
+            url: '/dashboard/geartype',
+          },
+          {
+            name: 'Fuel Type',
+            url: '/dashboard/fueltype',
+          },
+          {
+            name: 'Insurance Type',
+            url: '/dashboard/insurancetype',
+          },
+          {
+            name: 'Color',
+            url: '/dashboard/colors',
+          },
+          {
+            name: 'Brand',
+            url: '/dashboard/brands',
+          },
+          ]
       },
 ];

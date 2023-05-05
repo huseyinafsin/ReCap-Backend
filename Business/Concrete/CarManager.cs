@@ -116,10 +116,10 @@ namespace Business.Concrete
             return new  SuccessDataResult<CarUpdateDto>(result, Messages.CarUpdated);
         }
 
-        public IDataResult<IEnumerable<CarGridDto>> GetPaged(int page, int pageSize)
+        public IDataResult<CarGridModelDto> GetPaged(int page, int pageSize)
         {
             var result = _carDal.GetPaged(page, pageSize);
-            return new SuccessDataResult<IEnumerable<CarGridDto>>( result, Messages.CarListed);
+            return new SuccessDataResult<CarGridModelDto>( result, Messages.CarListed);
 
         }
 

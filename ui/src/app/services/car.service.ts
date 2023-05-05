@@ -7,6 +7,10 @@ import { CarDetail } from '../models/carDetail';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
+import { CarGridDto } from '../models/CarGridDto';
+import { CarCreateDto } from '../models/CarCreateDto';
+import { Guid } from 'guid-typescript';
+import { CarGridModelDto } from '../models/CarGridModelDto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +21,9 @@ export class CarService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getCars():Observable<ListResponseModel<CarDetail>>{
-    let path = `${this.apiServiceUrl}/getall`
-    return this.httpClient.get<ListResponseModel<CarDetail>>(path)
+  getPaged(page:number,  pageSize:number):Observable<SingleResponseModel<CarGridModelDto>>{
+    let path = `${this.apiServiceUrl}/getpaged?page=${page}&&pageSize=${pageSize}`
+    return this.httpClient.get<SingleResponseModel<CarGridModelDto>>(path)
   }
 
   getCarsByColor(colorId:number):Observable<ListResponseModel<CarDetail>>{
@@ -48,14 +52,15 @@ export class CarService {
   }
 
 
-  add(car:Car):Observable<ResponseModel>{
-    let path = `${this.apiServiceUrl}/add`
+  add(car:CarCreateDto):Observable<ResponseModel>{
+    console.log(car)
+    let path = `${this.apiServiceUrl}`
     return this.httpClient.post<ResponseModel>(path,car)
   }
 
-  delete(car:Car):Observable<ResponseModel>{
-    let path = `${this.apiServiceUrl}/delete`
-    return this.httpClient.post<ResponseModel>(path,car)
+  delete(id:Guid):Observable<ResponseModel>{
+    let path = `${this.apiServiceUrl}/${id}`
+    return this.httpClient.delete<ResponseModel>(path)
   }
 
   update(car:Car):Observable<HttpEvent<ResponseModel>>{

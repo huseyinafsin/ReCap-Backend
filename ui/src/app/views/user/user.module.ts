@@ -19,9 +19,8 @@ import { PaymentSuccessComponent } from './rental-add/payment-success/payment-su
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // import { NgbAlertModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { ColorFilterPipe } from '../pipes/color-filter.pipe';
-import { BrandFilterPipe } from '../pipes/brand-filter.pipe';
-import { CarFilterPipe } from '../pipes/car-filter.pipe';
+import { ColorFilterPipe } from '../../pipes/color-filter.pipe';
+import { CarFilterPipe } from '../../pipes/car-filter.pipe';
 import{MatIconModule} from '@angular/material/icon'
 import { IconModule } from '@coreui/icons-angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
@@ -46,8 +45,6 @@ import { CardModule } from '@coreui/angular';
     PaymentSuccessComponent,
                 //pipes
                 ColorFilterPipe,
-                BrandFilterPipe,
-                CarFilterPipe,
 
 
   ],

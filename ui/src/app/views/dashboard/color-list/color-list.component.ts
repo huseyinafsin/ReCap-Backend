@@ -1,53 +1,81 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Color } from 'src/app/models/color';
-import { ColorDto } from 'src/app/models/colorDto';
-import { ColorService } from 'src/app/services/color.service';
 import {NgForm} from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
+import { ToastrService } from 'ngx-toastr';
+import { SystemCreateDto } from 'src/app/models/SystemCreate';
+import { SystemDto } from 'src/app/models/systemDto';
+import { SystemService } from 'src/app/services/system.service';
+import { SystemTable } from 'src/environments/environment';
 @Component({
   selector: 'app-color-list',
   templateUrl: './color-list.component.html',
   styleUrls: ['./color-list.component.scss']
 })
 export class ColorListComponent implements OnInit {
-  isModalHidden :boolean=true
-  colors:Color[] = []
-  currentColor  = {} || null
-  dataLoaded:boolean = false
+  colors:SystemDto[];
   filterText:string=""
-  @ViewChild('createModal') createModal: any;
-
   constructor(
-    private colorService:ColorService    ) { }
+    private systemService:SystemService,
+    private toaster:ToastrService,
+    private modalService: NgbModal
+    ) {
 
-  ngOnInit(): void
-  {
-    this.getColors();
   }
+  ngOnInit(): void {
 
-  getColors(){
-    this.colorService.getColors().subscribe(response=>{
-        this.colors = response.data;
-        this.dataLoaded = true;
-    });
+    this.getColors()
   }
-  onSubmit(f: NgForm) {
-    let color:ColorDto={
-      name: f.value.name,
+  onSubmit(f:NgForm){
+    let model:SystemCreateDto ={
+      name:f.value.name
     }
-    console.log(f.value.name)
-    this.colorService.add (color).subscribe( (data)=>{
-      this.isModalHidden =true
-    });
-    this.isModalHidden =true
-  }
-
-  onDelete(id:Guid){
-    this.colorService.delete(id).subscribe(response=>{
-      if(response.message)
+    this.systemService.add(SystemTable.Color,model ).subscribe(res=>{
+      if(res.success){
+        this.toaster.success(res.message);
         this.getColors()
+      }
+      else
+        this.toaster.error(res.message)
     })
   }
 
+
+  getColors(){
+    this.systemService.getAll(SystemTable.Color).subscribe(res=>{
+      this.colors =res.data;
+    })
+  }
+  onUpdate(f:NgForm){
+    let model:SystemDto={
+      id: f.value.id,
+      name: f.value.name
+    }
+    console.log(model)
+    this.systemService.update(SystemTable.Color, model).subscribe(res=>{
+      if(res.success){
+        this.toaster.success(res.message);
+        this.getColors()
+      }
+      else
+        this.toaster.error(res.message)
+    })
+  }
+  onDelete(id:Guid){
+      this.systemService.delete(SystemTable.Color, id).subscribe(res=>{
+        if(res.success){
+          this.toaster.success(res.message);
+          this.getColors()
+        }
+        else
+          this.toaster.error(res.message)
+      })
+  }
+  open(content:any) {
+		this.modalService.open(content, { windowClass: 'custom-ngb-modal-window', backdropClass: 'custom-ngb-modal-backdrop' });
+	}
+  onSearch(e:any){
+    this.filterText=e.value
+    console.log(e)
+  }
 }

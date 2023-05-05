@@ -1,1 +1,66 @@
-<p>car-add works!</p>
+
+<div class="card card-body">
+  <form  [formGroup]="form" cForm (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="mb-3 col-6 col-md-6 col-lg-6">
+        <label cLabel for="inputEmail-1">Name</label>
+        <input formControlName="carName"  cFormControl id="inputEmail-1" type="text">
+        <div cFormText>
+          We'll never share your email with anyone else
+        </div>
+      </div>
+      <div class="mb-3 col-6 col-md-6 col-lg-6">
+        <label cLabel for="inputPassword-1">Model</label>
+        <input formControlName="model" cFormControl id="inputPassword-1" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Color</label>
+        <select formControlName="colorId"  id="disabledSelect-5" cSelect >
+          <option *ngFor="let color of colors" [ngValue]="color.id" >{{color.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Brand</label>
+        <select id="disabledSelect-5" formControlName="brandId" cSelect >
+          <option *ngFor="let brand of brands" [ngValue]="brand.id" >{{brand.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Min Findex</label>
+        <input type="number" formControlName="minFindexScore" cFormControl >
+        <div cFormText>
+          We'll never share your email with anyone else
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Car Type</label>
+        <select formControlName="carTypeId" id="disabledSelect-5" cSelect >
+          <option *ngFor="let carType of carTypes" [ngValue]="carType.id">{{carType.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Fuel Type</label>
+        <select formControlName="fuelTypeId" id="disabledSelect-5" cSelect >
+          <option *ngFor="let fuelType of fuelTypes" [ngValue]="fuelType.id" selected>{{fuelType.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Gear Type</label>
+        <select formControlName="gearTypeId" id="disabledSelect-5" cSelect >
+          <option *ngFor="let gearType of gearTypes" [ngValue]="gearType.id" selected >{{gearType.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="mb-3 col-12 col-lg-12 h-100" >
+        <label cLabel for="inputEmail-1">Description</label>
+        <textarea formControlName="description" cols="10" rows="5"  class="form-control " cFormControl id="inputEmail-1" ></textarea>
+      </div>
+    </div>
+    <input cButton color="primary" type="submit">
+  </form>
+</div>
