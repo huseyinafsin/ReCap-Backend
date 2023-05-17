@@ -6,6 +6,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CarImage } from 'src/app/models/carImage';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CarDetail } from 'src/app/models/carDetail';
+import { Guid } from 'guid-typescript';
 
 
 
@@ -71,13 +72,13 @@ export class CarDetailComponent implements OnInit {
   }
 
 
-  getCarDetailById(carId:number){
-    return this.carService.getCarDetailsById(carId).subscribe(response=>{
-      this.car = response.data
-      this.images =response.data.images
-      this.dataLoaded = true
-    })
-  }
+  // getCarDetailById(carId:Guid){
+  //   return this.carService.getCarDetailsById(carId).subscribe(response=>{
+  //     this.car = response.data
+  //     this.images =response.data.images
+  //     this.dataLoaded = true
+  //   })
+  // }
 
   createDateForm(){
     this.dateForm = this.formBuilder.group({

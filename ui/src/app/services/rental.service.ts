@@ -6,6 +6,7 @@ import { Cart } from '../models/cart';
 import { ListResponseModel } from '../models/listResponseModel';
 import { RentalDto } from '../models/rentalDto';
 import { SingleResponseModel } from '../models/singleResponseModel';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class RentalService {
     return this.httpClient.post<any>(path,cart);
   }
 
-  isRentable(carId:number,rentDate:Date,returnDate:Date):Observable<SingleResponseModel<boolean>>{
+  isRentable(carId:Guid,rentDate:Date,returnDate:Date):Observable<SingleResponseModel<boolean>>{
     let path = this.apiServiceUrl + '/isrentable?carId=' + carId +'&rentDate=' +rentDate +'&returnDate=' +returnDate
     return this.httpClient.get<SingleResponseModel<boolean>>(path);
   }

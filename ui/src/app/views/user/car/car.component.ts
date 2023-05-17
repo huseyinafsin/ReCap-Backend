@@ -8,6 +8,7 @@ import { CarImageService } from 'src/app/services/car-image.service'
 import { CarService } from 'src/app/services/car.service'
 import { ColorService } from 'src/app/services/color.service'
 import { CarImage } from 'src/app/models/carImage'
+import { Guid } from 'guid-typescript'
 
 
 @Component({
@@ -53,7 +54,7 @@ export class CarComponent implements OnInit {
     this.getColors()
   }
 
-  getImageUrl(carId:number):string{
+  getImageUrl(carId:Guid):string{
     let image = this.images.find(x=>x.carId==carId)
     if (image!=null)
       return this.apiPath+ image.imagePath
@@ -103,12 +104,12 @@ export class CarComponent implements OnInit {
     // return this.images.find(x=>x.carId===carId).imagePath;
     return "null";
   }
-  getCarDetailById(carId:number){
-    return this.carService.getCarDetailsById(carId).subscribe(response=>{
-      this.car = response.data
-      this.dataLoaded = true
-    })
-  }
+  // getCarDetailById(carId:number){
+  //   return this.carService.getCarDetailsById(carId).subscribe(response=>{
+  //     this.car = response.data
+  //     this.dataLoaded = true
+  //   })
+  // }
 
   getSelectedBrand(brandId:number){
     if(this.filterBrandId==brandId){

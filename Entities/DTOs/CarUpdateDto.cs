@@ -20,7 +20,6 @@ namespace Entities.DTOs
         public string Description { get; set; }
         public int MinFindexScore { get; set; }
 
-        public IEnumerable<CarImage> Images { get; set; }
 
     }
 }

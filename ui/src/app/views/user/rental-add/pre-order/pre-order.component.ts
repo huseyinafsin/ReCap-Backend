@@ -38,7 +38,7 @@ export class PreOrderComponent implements OnInit {
     ngOnInit(){
       this.initForm()
       this.routerActive.params.subscribe(params=>{
-      this.getCar(params['id']);
+      // this.getCar(params['id']);
       this.currentUser = this.authService.getUser()
       this.getCustomer(this.currentUser!.email);
     })
@@ -77,12 +77,12 @@ export class PreOrderComponent implements OnInit {
       this.toasterService.error("Formunuz Eksik","Dikkat")
     }
   }
-  getCar(carId:number){
-    this.carService.getCarDetailsById(carId)
-      .subscribe(response =>{
-        this.car = response.data;
-      })
-  }
+  // getCar(carId:number){
+  //   this.carService.getCarDetailsById(carId)
+  //     .subscribe(response =>{
+  //       this.car = response.data;
+  //     })
+  // }
 
   // getFindexScore(customerId:number){
   //   this.customerServie.getFindexScore;

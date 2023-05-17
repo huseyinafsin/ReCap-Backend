@@ -1,3 +1,4 @@
+import { Guid } from "guid-typescript"
 
 export interface Cart{
   cardHolderFullName:string
@@ -5,7 +6,7 @@ export interface Cart{
   expiredYear:string
   expiredMonth:string
   cvc:string
-  carId:number
+  carId:Guid
   customerId:number
   rentDate:Date
   returnDate:Date

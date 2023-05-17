@@ -23,6 +23,7 @@ import { DashboardComponent } from './dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { WidgetsModule } from '../widgets/widgets.module';
 import { ColorListComponent } from './color-list/color-list.component';
@@ -37,6 +38,7 @@ import { CarTypeComponent } from './car-type/car-type.component';
 import { InsuranceTypeComponent } from './insurance-type/insurance-type.component';
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalAddComponent } from './rental-add/rental-add.component';
+import { GalleryModule } from 'ng-gallery';
 
 @NgModule({
   imports: [
@@ -60,8 +62,11 @@ import { RentalAddComponent } from './rental-add/rental-add.component';
     MatDialogModule,
     MatIconModule,
     MatButtonModule,
+    MatToolbarModule,
     FormsModule,
-    CardModule
+
+    CardModule,
+    GalleryModule
   ],
   declarations: [
     DashboardComponent,

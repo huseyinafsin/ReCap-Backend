@@ -11,6 +11,7 @@ import { CarGridDto } from '../models/CarGridDto';
 import { CarCreateDto } from '../models/CarCreateDto';
 import { Guid } from 'guid-typescript';
 import { CarGridModelDto } from '../models/CarGridModelDto';
+import { CarUpdateDto } from '../models/CarUpdateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,11 @@ export class CarService {
     let path = `${this.apiServiceUrl}/getpaged?page=${page}&&pageSize=${pageSize}`
     return this.httpClient.get<SingleResponseModel<CarGridModelDto>>(path)
   }
+  getCar(id:Guid):Observable<SingleResponseModel<Car>>{
+    let path = `${this.apiServiceUrl}/${id}`
+    return this.httpClient.get<SingleResponseModel<Car>>(path)
+  }
+
 
   getCarsByColor(colorId:number):Observable<ListResponseModel<CarDetail>>{
     let path = `${this.apiServiceUrl}/getbycolor?colorId=${colorId}`
@@ -36,9 +42,9 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<CarDetail>>(path)
   }
 
-  getCarDetailsById(carId:number):Observable<SingleResponseModel<CarDetail>>{
-    let path = `${this.apiServiceUrl}/cardetailsbyid?carId=${carId}`
-    return this.httpClient.get<SingleResponseModel<CarDetail>>(path)
+  getCarDetailsById(id:Guid):Observable<SingleResponseModel<CarUpdateDto>>{
+    let path = `${this.apiServiceUrl}/details/${id}`
+    return this.httpClient.get<SingleResponseModel<CarUpdateDto>>(path)
   }
 
   getCarDetails():Observable<ListResponseModel<CarDetail>>{
@@ -52,7 +58,7 @@ export class CarService {
   }
 
 
-  add(car:CarCreateDto):Observable<ResponseModel>{
+  add(car:Car):Observable<ResponseModel>{
     console.log(car)
     let path = `${this.apiServiceUrl}`
     return this.httpClient.post<ResponseModel>(path,car)
@@ -63,9 +69,9 @@ export class CarService {
     return this.httpClient.delete<ResponseModel>(path)
   }
 
-  update(car:Car):Observable<HttpEvent<ResponseModel>>{
-    let path = `${this.apiServiceUrl}/update`
-    return this.httpClient.post<HttpEvent<ResponseModel>>(path,car)
+  update(car:CarUpdateDto):Observable<SingleResponseModel<ResponseModel>>{
+    let path = `${this.apiServiceUrl}`
+    return this.httpClient.put<SingleResponseModel<ResponseModel>>(path,car)
   }
 
 

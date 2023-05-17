@@ -1,1 +1,118 @@
-<p>car-edit works!</p>
+
+<div class="card card-body">
+  <form  [formGroup]="form" cForm (ngSubmit)="onSubmit()">
+    <input formControlName="id" hidden cFormControl type="text">
+    <input formControlName="insertedUserId" hidden cFormControl type="text">
+    <div class="row">
+      <div class="mb-3 col-6 col-md-6 col-lg-6">
+        <label cLabel for="inputEmail-1">Name</label>
+        <input formControlName="carName"  cFormControl id="inputEmail-1" type="text">
+        <div cFormText>
+          We'll never share your email with anyone else
+        </div>
+      </div>
+      <div class="mb-3 col-6 col-md-6 col-lg-6">
+        <label cLabel for="inputPassword-1">Model</label>
+        <input formControlName="model" cFormControl id="inputPassword-1" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Color</label>
+        <select formControlName="colorId"  id="disabledSelect-5" cSelect >
+          <option *ngFor="let color of colors" [ngValue]="color.id" >{{color.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Brand</label>
+        <select id="disabledSelect-5" formControlName="brandId" cSelect >
+          <option *ngFor="let brand of brands" [ngValue]="brand.id" >{{brand.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Min Findex</label>
+        <input type="number" formControlName="minFindexScore" cFormControl >
+        <div cFormText>
+          We'll never share your email with anyone else
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Car Type</label>
+        <select formControlName="carTypeId" id="disabledSelect-5" cSelect >
+          <option *ngFor="let carType of carTypes" [ngValue]="carType.id" selected>{{carType.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Fuel Type</label>
+        <select formControlName="fuelTypeId" id="disabledSelect-5" cSelect >
+          <option *ngFor="let fuelType of fuelTypes" [ngValue]="fuelType.id" selected>{{fuelType.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4 col-lg-4">
+        <label cLabel for="disabledSelect-5">Gear Type</label>
+        <select formControlName="gearTypeId" id="disabledSelect-5" cSelect >
+          <option *ngFor="let gearType of gearTypes" [ngValue]="gearType.id" selected >{{gearType.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="mb-3 col-12 col-lg-12 h-100" >
+        <label cLabel for="inputEmail-1">Description</label>
+        <textarea formControlName="description" cols="10" rows="5"  class="form-control " cFormControl id="inputEmail-1" ></textarea>
+      </div>
+    </div>
+    <input cButton color="primary" type="submit">
+  </form>
+</div>
+
+
+
+<div  class="row photos">
+  <div class="col-sm-6 col-md-4 col-lg-3 item mb-3 position-relative bg-secondary d-flex flex-column align-items-center justify-content-end">
+    <mat-toolbar>
+      <input (change)="onChange(file)" type="file" #file readonly name="memberContactNo" />
+    </mat-toolbar>
+
+    <div class="div bg-info ">
+      <div class="example-button-container align-items-center justify-content-end ">
+        <button [disabled]="disabled" (click)="onUpload(file)" mat-fab color="primary" style="margin: 5px;">
+          <mat-icon>upload</mat-icon>
+        </button>
+        <button mat-fab [disabled]="canceled" (click)="file.value=''; canceled=true; disabled=true" fontIcon="delete">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let image of images" class="col-sm-6 col-md-4 col-lg-3 item mb-3 position-relative ">
+    <img class="img-fluid" [src]="image.imagePath">
+    <div class="div position-absolute top-50 start-50" style="transform: translate(-50%, -50%); background-color: transparent;">
+      <div class="example-button-container">
+        <button mat-mini-fab color="primary" style="margin: 5px;">
+          <mat-icon>zoom_in</mat-icon>
+        </button>
+        <button (click)="open(deleteModal)" mat-mini-fab  class="" fontIcon="delete">
+          <mat-icon >delete</mat-icon>
+        </button>
+        <!-- Modal -->
+        <ng-template #deleteModal let-modal>
+          <div class="modal-body">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+              <p>Bu öğe silinecek onaylıyor musunuz?</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button (click)="modal.close('Save click')" type="submit" class="btn btn-outline-secondary" >Kapat</button>
+            <button (click)="onDelete(image.id); modal.close('Save click')" type="submit" class="btn btn-outline-primary" >Onayla</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+</div>

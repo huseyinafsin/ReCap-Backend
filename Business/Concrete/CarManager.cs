@@ -35,7 +35,7 @@ namespace Business.Concrete
 
         //[CacheRemoveAspect("ICarService.Get")]
         //[SecuredOperation("admin,customer")]
-        //[ValidationAspect(typeof(CarValidator))]
+        [ValidationAspect(typeof(CarValidator))]
         public IDataResult<Car> AddCar( CarCreateDto car)
         {
            var mapped = _mapper.Map<Car>(car);
@@ -111,7 +111,6 @@ namespace Business.Concrete
             var updatedCar  = _carDal.Update(car);
             var result = _mapper.Map<CarUpdateDto>(updatedCar);
 
-            result.Images = _carImageService.GetAllCarImagesByCarId(carDto.Id).Data;
 
             return new  SuccessDataResult<CarUpdateDto>(result, Messages.CarUpdated);
         }

@@ -16,6 +16,8 @@ import { CustomerDetail } from 'src/app/models/customerDetail';
 import { UserForLogin } from 'src/app/models/userForLogin';
 import { environment } from 'src/environments/environment';
 import { CreditCard } from 'src/app/models/creditCard';
+import { Guid } from 'guid-typescript';
+import { CarUpdateDto } from 'src/app/models/CarUpdateDto';
 @Component({
   selector: 'app-rental-add',
   templateUrl: './rental-add.component.html',
@@ -23,7 +25,7 @@ import { CreditCard } from 'src/app/models/creditCard';
 })
 export class RentalAddComponent implements OnInit {
   rental!: RentalDto;
-  car!: CarDetail;
+  car!: CarUpdateDto;
   creditCardForm!: FormGroup;
   totalAmount: number = 0;
   dataLoaded: boolean = false;
@@ -74,8 +76,8 @@ export class RentalAddComponent implements OnInit {
     this.rentDate = this.parseDate(dateModel.rentDate);
     this.returnDate = this.parseDate(dateModel.returnDate);
   }
-  getCarDetailById(carId: number): void {
-    this.carService.getCarDetailsById(carId).subscribe((respons) => {
+  getCarDetailById(id: Guid): void {
+    this.carService.getCarDetailsById(id).subscribe((respons) => {
       this.car = respons.data;
       this.calculate();
     });
@@ -85,7 +87,7 @@ export class RentalAddComponent implements OnInit {
   calculate() {
     let timeInMilisec: number =this.returnDate.getTime() - this.rentDate.getTime();
     this.numberOfDay = Math.ceil(timeInMilisec / (1000 * 60 * 60 * 24));
-    this.subAmount = this.numberOfDay * this.car.dailyPrice;
+    // this.subAmount = this.numberOfDay * this.car.dailyPrice;
     this.vatAdded = this.subAmount * (this.vat / 100);
     this.totalAmount = this.subAmount + this.subAmount * (this.vat / 100);
   }
@@ -95,7 +97,7 @@ export class RentalAddComponent implements OnInit {
     return new Date(parts[0], parts[1] - 1, parts[2]);
   }
 
-  getImageUrl(carId: number): string {
+  getImageUrl(carId: Guid): string {
     let image = this.car?.images.find((x) => x.carId == carId);
     if (image != null) return this.apiPath + image.imagePath;
     else return this.apiPath + 'Images/CarImages/default.jpg';

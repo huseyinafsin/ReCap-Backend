@@ -51,8 +51,8 @@
       <td>{{car.color}}</td>
       <td>{{car.minFindexScore}}</td>
       <td>
-          <a data-target="#editModal"  data-toggle="modal">
-             <mat-icon aria-hidden="false"  aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
+          <a data-target="#editModal"  [routerLink]="'/dashboard/cars/edit/'+car.id" data-toggle="modal">
+             <mat-icon aria-hidden="false"   aria-label="Example home icon" class="i icon-lg icon-warn" fontIcon="edit"></mat-icon>
           </a>
       </td>
       <td>

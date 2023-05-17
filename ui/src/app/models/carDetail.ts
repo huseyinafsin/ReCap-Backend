@@ -1,13 +1,14 @@
+import { Guid } from "guid-typescript";
 import { CarImage } from "./carImage";
 
 export interface CarDetail {
-  id:number;
-  brandId:number
-  colorId:number
+  id:Guid;
+  brandId:Guid
+  colorId:Guid
   carName:string;
   brandName:string;
   colorName:string;
-  modelYear:number;
+  model:string;
   images:CarImage[];
   dailyPrice:number;
   description:string;

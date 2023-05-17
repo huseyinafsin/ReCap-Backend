@@ -1,6 +1,8 @@
+import { Guid } from "guid-typescript"
+
 export interface CarImage{
-  id:number
-  carId:number
+  id:Guid
+  carId:Guid
   imagePath:string
   date:Date
 }

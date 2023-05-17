@@ -11,7 +11,7 @@
     }
   },
   "files": [
-    "src/main.ts", "./src/app/models/CarGridDto.ts", "./src/app/models/CarCreateDto.ts", "./src/app/models/CarGridModelDto.ts"
+    "src/main.ts", "./src/app/models/CarGridDto.ts", "./src/app/models/CarCreateDto.ts", "./src/app/models/CarGridModelDto.ts", "./src/app/models/CarUpdateDto.ts"
   ],
   "include": [
     "src/**/*.d.ts"
