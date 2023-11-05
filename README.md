@@ -1,7 +1,7 @@
 # ReCapProject | Car Rental Project
 
 Car Rental Project developed using C# and MsSQL. This project using techniques like Aspect Oriented Programming (AOP), Object Oriented Programming (OOP), Autofac, Fluent Validation, Exception Handling, API Development and etc. 
-You can find the project's frontend with: [ReCapProject Frontend](https://github.com/huseyinafsin/ReCap-Angulard)
+You can find the project's frontend with: [ReCapProject Frontend](https://github.com/huseyinafsin/ReCap-Angular)
 
 #### Technologies
 - .NET Core
